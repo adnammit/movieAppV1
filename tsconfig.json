@@ -5,11 +5,15 @@
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
+    "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
     "baseUrl": ".",
     "types": [
       "webpack-env",
@@ -25,6 +29,18 @@
       "@/*": [
         "src/*",
         "*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/modules/*": [
+        "src/store/modules/*"
+      ],
+      "@/api/*": [
+        "src/services/api/*"
+      ],
+      "@/models/*": [
+        "src/models/*"
       ]
     },
     "lib": [

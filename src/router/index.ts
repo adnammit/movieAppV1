@@ -1,27 +1,44 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
+import Router from 'vue-router';
+import Hello from '@/components/Hello.vue';
+import Profile from '@/components/Profile.vue';
+import Auth from '@okta/okta-vue';
+import config from '@/config.json';
 
-Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
-	{
-		path: '/',
-		name: 'Home',
-		component: Home,
-	},
-	{
-		path: '/about',
-		name: 'About',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-	},
-];
-
-const router = new VueRouter({
-	routes,
+/* eslint-disable @typescript-eslint/camelcase */
+Vue.use(Auth, {
+	issuer: config.authClient,
+	client_id: config.clientId,
+	redirect_uri: config.redirectUrl,
+	scope: 'openid profile email',
 });
+/* eslint-enable @typescript-eslint/camelcase */
+
+Vue.use(Router);
+
+const router = new Router({
+	mode: 'history',
+	routes: [
+		{
+			path: '/',
+			name: 'Hello',
+			component: Hello,
+		},
+		{
+			path: '/implicit/callback',
+			component: Auth.handleCallback(),
+		},
+		{
+			path: '/Profile',
+			name: 'Profile',
+			component: Profile,
+			meta: {
+				requiresAuth: true,
+			},
+		},
+	],
+});
+
+router.beforeEach(Vue.prototype.$auth.authRedirectGuard());
 
 export default router;

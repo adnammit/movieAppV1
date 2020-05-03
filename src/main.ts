@@ -3,6 +3,7 @@ import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
 import vuetify from '@/plugins/vuetify';
+import moment from 'moment';
 
 Vue.config.productionTip = false;
 
@@ -12,3 +13,11 @@ new Vue({
 	vuetify,
 	render: h => h(App),
 }).$mount('#app');
+
+Vue.filter('formatYear', (value: Date) => {
+	const date = moment(String(value));
+	if (date.isValid()) {
+		return date.year();
+	}
+	return '';
+});

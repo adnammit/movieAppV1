@@ -36,9 +36,20 @@ Reference the injected AuthClient with `this.$auth` anywhere in the Vue instance
 To protect a page, add the `requiresAuth` attribute to its route in `router/index`
 
 
+### Okta and Typescript
+
+install okta
+```
+npm i @okta/okta-vue
+```
+
+then install types
+```
+npm i @types/okta__okta-vue
+```
+
 ## Other Ref
 [Name That Color](http://chir.ag/projects/name-that-color/#42853E)
-
 
 
 ## App Design
@@ -61,7 +72,8 @@ A list of all movies in the collection. Filterable by:
 * add rating to a movie in the collection
 * set watched flag for movies in collection
 * set favorite flag for movies in collection
-
+* get a random unwatched movie
+    - include optional filters by genre (random watched as well?)
 
 ## TO DO
 **start here**
