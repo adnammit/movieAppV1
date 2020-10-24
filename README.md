@@ -77,6 +77,15 @@ A list of all movies in the collection. Filterable by:
 
 ## TO DO
 **start here**
+* still migrating stuff from movie -> movie2
+* setting up psql in your heroku app
+    - refer to psql notes and movieApi readme for info
+* how much do we want to rely on imdb? should we store anything other than imdb id?
+    - more robust to store the info (title, genre, year, etc) but not necessary
+    - if we store it (or don't), we can write a script to get data from imdb and update values in db
+* mocking data for development and for demo:
+    - app will use `IMovieService` (and `IUserService` etc)
+    - depending on environment, load either `MockMovieService` which returns static results or `MovieService` which actually talks to the backend
 * work out how these objects should be mapped:
     - Collection -> look into using data stored in api db
     - Movie -> CollectionItem?
@@ -84,7 +93,6 @@ A list of all movies in the collection. Filterable by:
         * SearchResult and CollectionItem inherit from some common base? they're v similar
     - consider making these interfaces
 * consolidate css for movies and search
-* well, apparently you can't write to a file in js, so you'll have to figure out how to store data...
 * work flow:
     - default: display all in own collection
     - click Favorites to filter favorites
@@ -100,9 +108,6 @@ A list of all movies in the collection. Filterable by:
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
 * what is your data model here? what will be retrieved via api vs stored?
     - data that would need to be stored: check out `data.json`
-* figure out how to store user selections
-    - psql
-    - json file
 * add a store
     - replace movies w/ results when searching
     - pass around isLoading/isErrored maybe
@@ -119,7 +124,7 @@ A list of all movies in the collection. Filterable by:
     - add sort by genre
     - allow sort by name, year, rating, watched, favorited
 * consolidate css into separate files if that makes sense
-* wow yr build takes one million years... see if you can delete some unused packages
+* wow yr build takes one million years... see if you can delete some unused packages or something
 
 ## DONE
 * refactor to use a centralized request mgr for cleaner code -- let components just be components
