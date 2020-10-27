@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Hello from '@/components/Hello.vue';
 import Profile from '@/components/Profile.vue';
+import Collection from '@/components/Collection.vue';
 import Auth from '@okta/okta-vue';
 import config from '@/config.json';
 
@@ -32,6 +33,14 @@ const router = new Router({
 			path: '/Profile',
 			name: 'Profile',
 			component: Profile,
+			meta: {
+				requiresAuth: true,
+			},
+		},
+		{
+			path: '/Collection',
+			name: 'Collection',
+			component: Collection,
 			meta: {
 				requiresAuth: true,
 			},

@@ -11,6 +11,9 @@
 				<span class="mr-2">Log In</span>
 			</v-btn>
 			<div v-else>
+				<v-btn text href="/collection">
+					<span class="font-weight-light">Collection</span>
+				</v-btn>
 				<v-btn text href="/profile">
 					<span class="font-weight-light">Profile</span>
 				</v-btn>

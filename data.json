@@ -1,0 +1,39 @@
+{
+	"data": [
+		{
+			"Email": "amandaryman@gmail.com",
+			"Movies": [
+				{
+					"Id": "299536",
+					"Favorite": "true",
+					"Watched": "true"
+				},
+				{
+					"Id": "948",
+					"Favorite": "false",
+					"Watched": "false"
+				},
+				{
+					"Id": "4233",
+					"Favorite": "false",
+					"Watched": "false"
+				},
+				{
+					"Id": "8392",
+					"Favorite": "false",
+					"Watched": "true"
+				},
+				{
+					"Id": "17346",
+					"Favorite": "true",
+					"Watched": "false"
+				},
+				{
+					"Id": "384018",
+					"Favorite": "false",
+					"Watched": "false"
+				}
+			]
+		}
+	]
+}
