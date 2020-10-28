@@ -32,6 +32,10 @@ class MediaProvider {
 
 		return movies;
 	}
+
+	public updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		return this.service.updateUserMovie(userid, movie);
+	}
 }
 
 export default new MediaProvider();

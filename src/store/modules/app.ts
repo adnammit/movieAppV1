@@ -3,6 +3,7 @@ import store from '@/store';
 import MediaProvider from '@/services/MediaProvider';
 import oktaUser from '@/models/oktaUser';
 import Collection from '@/models/collection';
+import Movie from '@/models/movie';
 
 export interface AppState {
 	isErrored: boolean;
@@ -62,6 +63,25 @@ class App extends VuexModule implements AppState {
 			.finally(() => {
 				this.context.commit(AppMutation.SET_IS_LOADING, false);
 			});
+	}
+
+	@Action
+	public async updateUserMovie(movie: Movie) {
+		// let user = this.user
+		// this.context.commit(AppMutation.SET_IS_LOADING, true);
+		let success = true;
+		MediaProvider.updateUserMovie(1, movie)
+			.then((res: boolean) => {
+				success = res;
+			})
+			.catch((e: any) => {
+				/* eslint-disable no-console */
+				console.log(e);
+				this.context.commit(AppMutation.SET_IS_ERRORED, true);
+			});
+		// .finally(() => {
+		// 	this.context.commit(AppMutation.SET_IS_LOADING, false);
+		// });
 	}
 
 	@Mutation

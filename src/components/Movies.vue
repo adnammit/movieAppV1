@@ -97,9 +97,6 @@
 				</tbody>
 			</template>
 		</v-simple-table>
-		<!-- <div class="my-2">
-				<v-btn small color="primary" @click="saveCollection()">Save</v-btn>
-        </div>-->
 	</div>
 </template>
 
@@ -117,10 +114,12 @@ export default class Movies extends Vue {
 
 	private toggleFavorite(movie: Movie): void {
 		movie.favorite = !movie.favorite;
+		AppModule.updateUserMovie(movie);
 	}
 
 	private toggleWatched(movie: Movie): void {
 		movie.watched = !movie.watched;
+		AppModule.updateUserMovie(movie);
 	}
 
 	private getGenreMatch(movie: Movie, genre: string) {

@@ -2,7 +2,7 @@
 	<div class="container-fluid mt-4 filter-bar">
 		<div>
 			<v-toolbar dense short flat>
-				<!-- <v-toolbar-title>Filter</v-toolbar-title> -->
+				<!-- <v-toolbar-title>As You Wish</v-toolbar-title> -->
 				<v-btn text @click="toggleFavorites()">Favorites</v-btn>
 				<v-btn text @click="toggleWatched()">To Do</v-btn>
 				<v-btn text>Add</v-btn>
