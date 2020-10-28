@@ -5,8 +5,8 @@ export default class Collection {
 	public email = '';
 	public movies: Movie[] = [];
 
-	constructor(userid: number, movies: Movie[]) {
-		this.userid = userid;
-		this.movies = movies;
+	constructor(userid?: number, movies?: Movie[]) {
+		this.userid = userid ? userid : 0;
+		this.movies = movies ? movies : [];
 	}
 }

@@ -15,7 +15,11 @@ class App extends VuexModule implements AppState {
 	public isErrored = false;
 	public isLoading = false;
 	public currentUser = new oktaUser();
-	private collection?: Collection;
+	public collection = new Collection();
+
+	public get userMovies() {
+		return this.collection ? this.collection?.movies : [];
+	}
 
 	@Action
 	async setIsLoading(val: boolean) {
@@ -29,10 +33,15 @@ class App extends VuexModule implements AppState {
 
 	@Action
 	public async setCurrentUser(user: oktaUser) {
-		this.context.commit('SET_IS_LOADING', true);
-		this.context.commit('SET_USER', user);
+		if (this.currentUser != user) {
+			this.context.commit('SET_USER', user);
+		}
+	}
 
-		// to-do: mapping between okta user and our users -- or just replace our model with okta?
+	@Action
+	public async getUserCollection() {
+		// let user = this.user
+		this.context.commit('SET_IS_LOADING', true);
 		MediaProvider.getUserCollection(1)
 			.then((res: Collection) => {
 				this.context.commit('SET_COLLECTION', res);
