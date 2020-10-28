@@ -1,5 +1,6 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
 import store from '@/store';
+import { AppModule } from '@/store/modules/app';
 // import { SearchResult } from '@/models/search';
 // import { Collection } from '@/models/interfaces';
 // import Movie from '@/models/movie';
@@ -68,7 +69,7 @@ class Filter extends VuexModule implements FilterState {
 
 	@Action
 	public async Search(search: string) {
-		// this.context.commit('SET_IS_LOADING', true);
+		// AppModule.setIsLoading(true);
 		// MovieApi.search(search)
 		// 	.then((results: any) => {
 		// 		if (results.Error != null) {

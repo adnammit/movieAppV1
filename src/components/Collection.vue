@@ -1,11 +1,8 @@
 <template>
 	<div class="container-fluid mt-4">
 		<FilterBar />
-		<Errored v-if="isErrored" />
-		<!-- <Loading v-if="isLoading" /> -->
-		<!-- <Search v-else-if="showSearch" /> -->
-		<Movies v-else />
-		<!-- TODO: error -->
+		<!-- <Search v-if="showSearch" /> -->
+		<Movies />
 	</div>
 </template>
 
@@ -25,14 +22,6 @@ import Search from '@/components/Search.vue';
 	},
 })
 export default class MoviesView extends Vue {
-	private get isErrored() {
-		return AppModule.isErrored;
-	}
-
-	private get isLoading() {
-		return AppModule.isLoading;
-	}
-
 	private get showSearch() {
 		return FilterModule.showSearch;
 	}

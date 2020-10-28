@@ -1,7 +1,8 @@
 <template>
 	<v-app>
 		<NavBar />
-		<v-content class="content">
+		<Error v-if="isErrored" />
+		<v-content v-else class="content">
 			<router-view />
 		</v-content>
 	</v-app>
@@ -12,14 +13,20 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Watch } from 'vue-property-decorator';
 import NavBar from '@/components/NavBar.vue';
+import Error from '@/components/Error.vue';
 import { AppModule } from '@/store/modules/app';
 
 @Component({
 	components: {
 		NavBar,
+		Error,
 	},
 })
 export default class App extends Vue {
+	private get isErrored() {
+		return AppModule.isErrored;
+	}
+
 	private async refreshActiveUser() {
 		AppModule.setCurrentUser(await this.$auth.getUser());
 	}
@@ -30,7 +37,7 @@ export default class App extends Vue {
 
 	@Watch('$route')
 	onRouteChanged() {
-		this.refreshActiveUser(); // i don't love this - do it better
+		this.refreshActiveUser();
 	}
 }
 </script>
