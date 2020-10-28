@@ -6,15 +6,16 @@ import store from '@/store';
 // import AccountService from '@/services/AccountService';
 
 export interface FilterState {
-	// move these to app?
-	isErrored: boolean;
-	isLoading: boolean;
+	// // move these to app?
+	// isErrored: boolean;
+	// isLoading: boolean;
+	showSearch: boolean;
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'FilterState' })
 class Filter extends VuexModule implements FilterState {
-	public isErrored = false;
-	public isLoading = false;
+	// public isErrored = false;
+	// public isLoading = false;
 	public showSearch = false;
 	// private movies: Movie[] = [];
 	// private results: SearchResult[] = [];
@@ -31,15 +32,15 @@ class Filter extends VuexModule implements FilterState {
 	// 	this.results = results;
 	// }
 
-	@Action
-	async setIsLoading(val: boolean) {
-		this.context.commit('SET_IS_LOADING', val);
-	}
+	// @Action
+	// async setIsLoading(val: boolean) {
+	// 	this.context.commit('SET_IS_LOADING', val);
+	// }
 
-	@Action
-	async setIsErrored(val: boolean) {
-		this.context.commit('SET_IS_ERRORED', val);
-	}
+	// @Action
+	// async setIsErrored(val: boolean) {
+	// 	this.context.commit('SET_IS_ERRORED', val);
+	// }
 
 	// @Action
 	// public async LoadMovieList() {
@@ -61,38 +62,37 @@ class Filter extends VuexModule implements FilterState {
 	// 		});
 	// }
 
-	// @Action
-	// public async Search(search: string) {
-	// 	this.context.commit('SET_IS_LOADING', true);
+	@Action
+	public async Search(search: string) {
+		// this.context.commit('SET_IS_LOADING', true);
+		// MovieApi.search(search)
+		// 	.then((results: any) => {
+		// 		if (results.Error != null) {
+		// 			this.context.commit('SET_IS_ERRORED', true);
+		// 		} else {
+		// 			this.context.commit('SET_SEARCH_RESULTS', results);
+		// 			this.context.commit('SET_SHOW_SEARCH', true);
+		// 		}
+		// 	})
+		// 	.catch((e: any) => {
+		// 		/* eslint-disable no-console */
+		// 		console.log(e);
+		// 		this.context.commit('SET_IS_ERRORED', true);
+		// 	})
+		// 	.finally(() => {
+		// 		this.context.commit('SET_IS_LOADING', false);
+		// 	});
+	}
 
-	// 	MovieApi.search(search)
-	// 		.then((results: any) => {
-	// 			if (results.Error != null) {
-	// 				this.context.commit('SET_IS_ERRORED', true);
-	// 			} else {
-	// 				this.context.commit('SET_SEARCH_RESULTS', results);
-	// 				this.context.commit('SET_SHOW_SEARCH', true);
-	// 			}
-	// 		})
-	// 		.catch((e: any) => {
-	// 			/* eslint-disable no-console */
-	// 			console.log(e);
-	// 			this.context.commit('SET_IS_ERRORED', true);
-	// 		})
-	// 		.finally(() => {
-	// 			this.context.commit('SET_IS_LOADING', false);
-	// 		});
+	// @Mutation
+	// SET_IS_LOADING(val: boolean) {
+	// 	this.isLoading = val;
 	// }
 
-	@Mutation
-	SET_IS_LOADING(val: boolean) {
-		this.isLoading = val;
-	}
-
-	@Mutation
-	SET_IS_ERRORED(val: boolean) {
-		this.isErrored = val;
-	}
+	// @Mutation
+	// SET_IS_ERRORED(val: boolean) {
+	// 	this.isErrored = val;
+	// }
 
 	@Mutation
 	SET_SHOW_SEARCH(val: boolean) {

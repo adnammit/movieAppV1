@@ -8,6 +8,7 @@ export interface AppState {
 	isErrored: boolean;
 	isLoading: boolean;
 	currentUser: oktaUser;
+	collection: Collection;
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'AppState' })

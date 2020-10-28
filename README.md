@@ -93,11 +93,8 @@ A list of all movies in the collection. Filterable by:
 * simplify error/loading state -- have appModule do it all, or does filter need it?
 * what does prod deployment for the app look like?
 * update mock data in data.json
-* still migrating stuff from movie -> movie2
 * how to map okta user to our user model?
     - email might be the best "pk"...
-* setting up psql in your heroku app
-    - refer to psql notes and movieApi readme for info
 * how much do we want to rely on imdb? should we store anything other than imdb id?
     - more robust to store the info (title, genre, year, etc) but not necessary
     - if we store it (or don't), we can write a script to get data from imdb and update values in db

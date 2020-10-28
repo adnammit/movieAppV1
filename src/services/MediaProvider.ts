@@ -30,7 +30,6 @@ class MediaProvider {
 			movies.push(movie);
 		}
 
-		// console.log('>> movies ' + JSON.stringify(movies));
 		return movies;
 	}
 }
