@@ -12,6 +12,10 @@ export interface FilterState {
 	showSearch: boolean;
 }
 
+enum FilterMutation {
+	SET_SHOW_SEARCH = 'SET_SHOW_SEARCH',
+}
+
 @Module({ dynamic: true, namespaced: true, store, name: 'FilterState' })
 class Filter extends VuexModule implements FilterState {
 	// public isErrored = false;

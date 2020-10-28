@@ -11,6 +11,13 @@ export interface AppState {
 	collection: Collection;
 }
 
+enum AppMutation {
+	SET_IS_LOADING = 'SET_IS_LOADING',
+	SET_IS_ERRORED = 'SET_IS_ERRORED',
+	SET_USER = 'SET_USER',
+	SET_COLLECTION = 'SET_COLLECTION',
+}
+
 @Module({ dynamic: true, namespaced: true, store, name: 'AppState' })
 class App extends VuexModule implements AppState {
 	public isErrored = false;
@@ -24,36 +31,36 @@ class App extends VuexModule implements AppState {
 
 	@Action
 	async setIsLoading(val: boolean) {
-		this.context.commit('SET_IS_LOADING', val);
+		this.context.commit(AppMutation.SET_IS_LOADING, val);
 	}
 
 	@Action
 	async setIsErrored(val: boolean) {
-		this.context.commit('SET_IS_ERRORED', val);
+		this.context.commit(AppMutation.SET_IS_ERRORED, val);
 	}
 
 	@Action
 	public async setCurrentUser(user: oktaUser) {
 		if (this.currentUser != user) {
-			this.context.commit('SET_USER', user);
+			this.context.commit(AppMutation.SET_USER, user);
 		}
 	}
 
 	@Action
 	public async getUserCollection() {
 		// let user = this.user
-		this.context.commit('SET_IS_LOADING', true);
+		this.context.commit(AppMutation.SET_IS_LOADING, true);
 		MediaProvider.getUserCollection(1)
 			.then((res: Collection) => {
-				this.context.commit('SET_COLLECTION', res);
+				this.context.commit(AppMutation.SET_COLLECTION, res);
 			})
 			.catch((e: any) => {
 				/* eslint-disable no-console */
 				console.log(e);
-				this.context.commit('SET_IS_ERRORED', true);
+				this.context.commit(AppMutation.SET_IS_ERRORED, true);
 			})
 			.finally(() => {
-				this.context.commit('SET_IS_LOADING', false);
+				this.context.commit(AppMutation.SET_IS_LOADING, false);
 			});
 	}
 
