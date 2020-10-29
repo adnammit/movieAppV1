@@ -45,9 +45,9 @@ export default class FilterBar extends Vue {
 		return AppModule.isLoading;
 	}
 
-	private clearSearch() {
-		console.log('clear!');
-	}
+	// private clearSearch() {
+	// 	console.log('clear!');
+	// }
 
 	private doSearch(): void {
 		FilterModule.Search(this.search);

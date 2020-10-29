@@ -86,6 +86,18 @@ A list of all movies in the collection. Filterable by:
 
 ## TO DO
 **start here**
+* your ids are all swizzled
+    - you've got your id, imdbid and movieDbId
+    - in your db/api, change imdbid -> movieDbId and store imdb too
+* search:
+    - add actions: details, add to collection
+        * clicking a title opens details with an "Add to Collection" option
+        * add fields to rate, set fave/watched and button to add
+    - batch edits? ability to go through and star/check watched/rate and then click "save to collection"?
+    - maybe replace simple table with datatable -- add no-results state
+    - more finesse in the search field
+* support tv
+* add filter by genre
 * simplify error/loading state -- have appModule do it all, or does filter need it?
 * what does prod deployment for the app look like?
 * update mock data in data.json

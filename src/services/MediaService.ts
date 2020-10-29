@@ -24,11 +24,20 @@ class MediaService implements IMediaService {
 
 	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		const request: any = {
-			id: movie.id,
+			id: movie.movieDbId,
 			watched: movie.watched,
 			favorite: movie.favorite,
 		};
-		return requestMgr.put('user/' + userid + '/movie', request);
+		return requestMgr.put('user/' + userid + '/movies', request);
+	}
+
+	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		const request: any = {
+			id: movie.movieDbId,
+			watched: movie.watched,
+			favorite: movie.favorite,
+		};
+		return requestMgr.post('user/' + userid + '/movies', request);
 	}
 }
 

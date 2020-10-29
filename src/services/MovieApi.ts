@@ -19,17 +19,25 @@ class MovieApi {
 	public async search(search: string) {
 		return requestMgr.get('search/multi?query=' + search).then(res => {
 			const data = res.data.results;
-			const movies: Movie[] = [];
+			let movies: Movie[] = [];
 			data.forEach((d: any) => {
-				if (d.media_type == 'movie' || d.media_type == 'tv') movies.push(d as Movie);
-				else console.log('>> non-movie search result: ' + JSON.stringify(d));
+				if (d.media_type == 'movie') movies.push(d as Movie);
+				/// need to do some extra handling for tv -- they don't have title,
+				/// have name instead
+				// if (d.media_type == 'movie' || d.media_type == 'tv') movies.push(d as Movie);
+				// else console.log('>> non-movie search result: ' + JSON.stringify(d));
 			});
+			movies = movies.sort((a, b) => {
+				return a.title.localeCompare(b.title);
+			});
+			console.log('>>> ' + JSON.stringify(movies));
 			return movies;
 		});
 	}
 
 	public async getMovie(id: number): Promise<Movie> {
 		return requestMgr.get('movie/' + id).then(res => {
+			console.log('>> raw movie ' + JSON.stringify(res.data));
 			return this.parseMovie(res.data);
 		});
 	}

@@ -1,0 +1,347 @@
+[
+	{
+		"poster_path": "/9KXbCitUQisFZNsOaXfsxt9HC9p.jpg",
+		"popularity": 183.505,
+		"vote_count": 3,
+		"video": false,
+		"media_type": "movie",
+		"id": 680295,
+		"adult": false,
+		"backdrop_path": "/kq4XmPg0l4vBHf8A6SCGdboOukg.jpg",
+		"original_language": "en",
+		"original_title": "A Feral World",
+		"genre_ids": [
+			18,
+			27,
+			878
+		],
+		"title": "A Feral World",
+		"vote_average": 4.2,
+		"overview": "An orphaned boy in a post-apocalyptic world, meets a grieving woman who is trying to find her lost daughter. Their journey leads them face-to-face with a despot who may have the daughter held captive.",
+		"release_date": "2020-09-22"
+	},
+	{
+		"poster_path": "/gZkXGa544XnUNf44CEwb7gpU8Ma.jpg",
+		"popularity": 28.191,
+		"vote_count": 136,
+		"video": false,
+		"media_type": "movie",
+		"id": 411135,
+		"adult": false,
+		"backdrop_path": "/vRkupior3ni5NPLnIicpjRKYYVw.jpg",
+		"original_language": "en",
+		"original_title": "Future World",
+		"genre_ids": [
+			878
+		],
+		"title": "Future World",
+		"vote_average": 4.2,
+		"overview": "A young boy searches a future world wasteland for a rumored cure for his dying mother.",
+		"release_date": "2018-05-25"
+	},
+	{
+		"poster_path": "/rhr4y79GpxQF9IsfJItRXVaoGs4.jpg",
+		"popularity": 86.417,
+		"vote_count": 16131,
+		"video": false,
+		"media_type": "movie",
+		"id": 135397,
+		"adult": false,
+		"backdrop_path": "/yOCRqvrRrxbs5FYq2pX1KtLJwmR.jpg",
+		"original_language": "en",
+		"original_title": "Jurassic World",
+		"genre_ids": [
+			28,
+			12,
+			878,
+			53
+		],
+		"title": "Jurassic World",
+		"vote_average": 6.6,
+		"overview": "Twenty-two years after the events of Jurassic Park, Isla Nublar now features a fully functioning dinosaur theme park, Jurassic World, as originally envisioned by John Hammond.",
+		"release_date": "2015-06-06"
+	},
+	{
+		"vote_count": 0,
+		"popularity": 32.803,
+		"id": 507086,
+		"video": false,
+		"media_type": "movie",
+		"vote_average": 0,
+		"title": "Jurassic World: Dominion",
+		"release_date": "2022-06-09",
+		"original_language": "en",
+		"original_title": "Jurassic World: Dominion",
+		"genre_ids": [
+			12,
+			28,
+			878,
+			53
+		],
+		"backdrop_path": null,
+		"adult": false,
+		"overview": "Plot unknown.",
+		"poster_path": "/4lCQirdaxCHBCeTmwHw7zITx521.jpg"
+	},
+	{
+		"poster_path": "/c9XxwwhPHdaImA2f1WEfEsbhaFB.jpg",
+		"popularity": 107.43,
+		"vote_count": 8238,
+		"video": false,
+		"media_type": "movie",
+		"id": 351286,
+		"adult": false,
+		"backdrop_path": "/3s9O5af2xWKWR5JzP2iJZpZeQQg.jpg",
+		"original_language": "en",
+		"original_title": "Jurassic World: Fallen Kingdom",
+		"genre_ids": [
+			28,
+			12,
+			878
+		],
+		"title": "Jurassic World: Fallen Kingdom",
+		"vote_average": 6.6,
+		"overview": "Three years after the demise of Jurassic World, a volcanic eruption threatens the remaining dinosaurs on the isla Nublar, so Claire Dearing, the former park manager, recruits Owen Grady to help prevent the extinction of the dinosaurs once again.",
+		"release_date": "2018-06-06"
+	},
+	{
+		"poster_path": "/aTV14kh4YVXafBZtyNjQ2GrWsNh.jpg",
+		"popularity": 19.879,
+		"vote_count": 148,
+		"video": false,
+		"media_type": "movie",
+		"id": 20329,
+		"adult": false,
+		"backdrop_path": "/kuRd2TvabZOnWW0xwfY0MoOLHTH.jpg",
+		"original_language": "ja",
+		"original_title": "L: change the WorLd",
+		"genre_ids": [
+			28,
+			14,
+			9648,
+			878,
+			53
+		],
+		"title": "L: Change the World",
+		"vote_average": 5.8,
+		"overview": "\"The human whose name is written in the Death Note shall die.\" After making the hardest decision ever, another serious case confronts L. There are only 23 days left and without his best partner Watari (Shunji Fujimura), L has to solve the case all by himself for the very first time.",
+		"release_date": "2008-02-09"
+	},
+	{
+		"poster_path": "/tUv3bzjaDiWICUYrDWo7uXmbAQX.jpg",
+		"popularity": 28.211,
+		"vote_count": 4,
+		"video": false,
+		"media_type": "movie",
+		"id": 520788,
+		"adult": false,
+		"backdrop_path": "/2uAyKQf5nej3TiWUqbanr6Zb9YU.jpg",
+		"original_language": "en",
+		"original_title": "Mad World",
+		"genre_ids": [
+			878
+		],
+		"title": "Mad World",
+		"vote_average": 3.8,
+		"overview": "It is the year 2037. Our world is dying, slowly, from a virus that has rendered mankind infertile. Not a single child has been born in 25 years. Governments are now powerless puppets for the biggest corporations and Biocorp, the world's biggest, keeps promising a cure that never comes",
+		"release_date": "2018-01-02"
+	},
+	{
+		"poster_path": "/yhzTeZU5OULn3ePGF58Rc5oIocZ.jpg",
+		"popularity": 29.903,
+		"vote_count": 621,
+		"video": false,
+		"media_type": "movie",
+		"id": 531306,
+		"adult": false,
+		"backdrop_path": "/wsjcWHezujlzhBpED3KXq3JkxmB.jpg",
+		"original_language": "en",
+		"original_title": "Rim of the World",
+		"genre_ids": [
+			28,
+			12,
+			35,
+			878
+		],
+		"title": "Rim of the World",
+		"vote_average": 6,
+		"overview": "Stranded at a summer camp when aliens attack the planet, four teens with nothing in common embark on a perilous mission to save the world.",
+		"release_date": "2019-05-24"
+	},
+	{
+		"vote_count": 7,
+		"popularity": 46.293,
+		"id": 610133,
+		"video": true,
+		"media_type": "movie",
+		"vote_average": 6.6,
+		"title": "The World of Dragon Ball Z",
+		"release_date": "2000-01-21",
+		"original_language": "en",
+		"original_title": "The World of Dragon Ball Z",
+		"genre_ids": [
+			28
+		],
+		"backdrop_path": "/oMpOTrLdbVj54gLgOmNgX9zTJi.jpg",
+		"adult": false,
+		"overview": "A review of Dragon Ball Z from the Saiyan Saga all the way to the Trunks Saga.",
+		"poster_path": "/1J1e8Uslw8MAE7mIVFh6TU9mPt8.jpg"
+	},
+	{
+		"vote_count": 12540,
+		"popularity": 43.08,
+		"id": 76338,
+		"video": false,
+		"media_type": "movie",
+		"vote_average": 6.6,
+		"title": "Thor: The Dark World",
+		"release_date": "2013-10-29",
+		"original_language": "en",
+		"original_title": "Thor: The Dark World",
+		"genre_ids": [
+			28,
+			12,
+			14
+		],
+		"backdrop_path": "/uhYoytlNaq46dG81wLmHqaSuzWu.jpg",
+		"adult": false,
+		"overview": "Thor fights to restore order across the cosmos… but an ancient race led by the vengeful Malekith returns to plunge the universe back into darkness. Faced with an enemy that even Odin and Asgard cannot withstand, Thor must embark on his most perilous and personal journey yet, one that will reunite him with Jane Foster and force him to sacrifice everything to save us all.",
+		"poster_path": "/wp6OxE4poJ4G7c0U2ZIXasTSMR7.jpg"
+	},
+	{
+		"poster_path": "/7W0G3YECgDAfnuiHG91r8WqgIOe.jpg",
+		"popularity": 295.08,
+		"vote_count": 1239,
+		"video": false,
+		"media_type": "movie",
+		"id": 446893,
+		"adult": false,
+		"backdrop_path": "/qsxhnirlp7y4Ae9bd11oYJSX59j.jpg",
+		"original_language": "en",
+		"original_title": "Trolls World Tour",
+		"genre_ids": [
+			12,
+			16,
+			35,
+			14,
+			10402,
+			10751
+		],
+		"title": "Trolls World Tour",
+		"vote_average": 7.6,
+		"overview": "Queen Poppy and Branch make a surprising discovery — there are other Troll worlds beyond their own, and their distinct differences create big clashes between these various tribes. When a mysterious threat puts all of the Trolls across the land in danger, Poppy, Branch, and their band of friends must embark on an epic quest to create harmony among the feuding Trolls to unite them against certain doom.",
+		"release_date": "2020-03-12"
+	},
+	{
+		"poster_path": "/rsgklbt5KxeuUuchehnLACxzisP.jpg",
+		"popularity": 13.046,
+		"vote_count": 1476,
+		"video": false,
+		"media_type": "movie",
+		"id": 8872,
+		"adult": false,
+		"backdrop_path": "/oAbLW4S00UY1qp2mRCu1PjT8Zsf.jpg",
+		"original_language": "en",
+		"original_title": "Wayne's World",
+		"genre_ids": [
+			35,
+			10402
+		],
+		"title": "Wayne's World",
+		"vote_average": 6.7,
+		"overview": "When a sleazy TV exec offers Wayne and Garth a fat contract to tape their late-night public access show at his network, they can't believe their good fortune. But they soon discover the road from basement to big-time is a gnarly one, fraught with danger, temptation and ragin' party opportunities.",
+		"release_date": "1992-02-14"
+	},
+	{
+		"poster_path": "/1SWBSYJsnyhdNRfLI1T6RsCxAQ4.jpg",
+		"popularity": 48.562,
+		"vote_count": 11312,
+		"video": false,
+		"media_type": "movie",
+		"id": 72190,
+		"adult": false,
+		"backdrop_path": "/upsk7nfUjf8ZSYuokwa5U5YXERm.jpg",
+		"original_language": "en",
+		"original_title": "World War Z",
+		"genre_ids": [
+			28,
+			18,
+			27,
+			878,
+			53
+		],
+		"title": "World War Z",
+		"vote_average": 6.8,
+		"overview": "Life for former United Nations investigator Gerry Lane and his family seems content. Suddenly, the world is plagued by a mysterious infection turning whole human populations into rampaging mindless zombies. After barely escaping the chaos, Lane is persuaded to go on a mission to investigate this disease. What follows is a perilous trek around the world where Lane must brave horrific dangers and long odds to find answers before human civilization falls.",
+		"release_date": "2013-06-20"
+	},
+	{
+		"adult": false,
+		"backdrop_path": "/95ozIP0A2fKaAXxwDxUEVn74Iux.jpg",
+		"belongs_to_collection": null,
+		"budget": 3700000,
+		"genres": [
+			{
+				"id": 14,
+				"name": "Fantasy"
+			},
+			{
+				"id": 16,
+				"name": "Animation"
+			},
+			{
+				"id": 10751,
+				"name": "Family"
+			}
+		],
+		"homepage": "https://movies.disney.com/my-neighbor-totoro",
+		"id": 8392,
+		"imdb_id": "tt0096283",
+		"original_language": "ja",
+		"original_title": "となりのトトロ",
+		"overview": "Two sisters move to the country with their father in order to be closer to their hospitalized mother, and discover the surrounding trees are inhabited by Totoros, magical spirits of the forest. When the youngest runs away from home, the older sister seeks help from the spirits to find her.",
+		"popularity": 41.875,
+		"poster_path": "/rtGDOeG9LzoerkDGZF9dnVeLppL.jpg",
+		"production_companies": [
+			{
+				"id": 10342,
+				"logo_path": "/eS79pslnoKbWg7t3PMA9ayl0bGs.png",
+				"name": "Studio Ghibli",
+				"origin_country": "JP"
+			},
+			{
+				"id": 12516,
+				"logo_path": null,
+				"name": "Nibariki",
+				"origin_country": "JP"
+			},
+			{
+				"id": 12523,
+				"logo_path": null,
+				"name": "Tokuma Japan Communications Co. Ltd.",
+				"origin_country": ""
+			}
+		],
+		"production_countries": [
+			{
+				"iso_3166_1": "JP",
+				"name": "Japan"
+			}
+		],
+		"release_date": "1988-04-16",
+		"revenue": 45000000,
+		"runtime": 86,
+		"spoken_languages": [
+			{
+				"iso_639_1": "ja",
+				"name": "日本語"
+			}
+		],
+		"status": "Released",
+		"tagline": "",
+		"title": "My Neighbor Totoro",
+		"video": false,
+		"vote_average": 8.1,
+		"vote_count": 4917
+	}
+]

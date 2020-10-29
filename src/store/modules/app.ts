@@ -86,6 +86,26 @@ class App extends VuexModule implements AppState {
 		// });
 	}
 
+	@Action
+	public async addUserMovie(movie: Movie) {
+		// let user = this.user
+		// this.context.commit(AppMutation.SET_IS_LOADING, true);
+		// let success = true;
+		MediaProvider.addUserMovie(1, movie)
+			.then((res: boolean) => {
+				// success = res;
+				this.getUserCollection();
+			})
+			.catch((e: any) => {
+				/* eslint-disable no-console */
+				console.log(e);
+				this.context.commit(AppMutation.SET_IS_ERRORED, true);
+			});
+		// .finally(() => {
+		// 	this.context.commit(AppMutation.SET_IS_LOADING, false);
+		// });
+	}
+
 	@Mutation
 	SET_IS_LOADING(val: boolean) {
 		this.isLoading = val;

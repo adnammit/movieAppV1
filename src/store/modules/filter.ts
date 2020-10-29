@@ -1,7 +1,8 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
 import store from '@/store';
 import { AppModule } from '@/store/modules/app';
-// import { SearchResult } from '@/models/search';
+import MovieApi from '@/services/MovieApi';
+import Movie from '@/models/movie';
 
 export interface FilterState {
 	filterByFavorite: boolean;
@@ -13,6 +14,7 @@ enum FilterMutation {
 	SET_FILTER_FAVORITES = 'SET_FILTER_FAVORITES',
 	SET_FILTER_TODO = 'SET_FILTER_TODO',
 	SET_SHOW_SEARCH = 'SET_SHOW_SEARCH',
+	SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS',
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'FilterState' })
@@ -20,7 +22,7 @@ class Filter extends VuexModule implements FilterState {
 	public filterByFavorite = false;
 	public filterByTodo = false;
 	public showSearch = false;
-	// private results: SearchResult[] = [];
+	public results: Movie[] = [];
 
 	// public get SearchResults(): SearchResult[] {
 	// 	return this.results;
@@ -51,25 +53,35 @@ class Filter extends VuexModule implements FilterState {
 	}
 
 	@Action
+	async setShowSearch(val: boolean) {
+		this.context.commit(FilterMutation.SET_SHOW_SEARCH, val);
+	}
+
+	@Action
 	public async Search(search: string) {
-		// AppModule.setIsLoading(true);
-		// MovieApi.search(search)
-		// 	.then((results: any) => {
-		// 		if (results.Error != null) {
-		// 			this.context.commit('SET_IS_ERRORED', true);
-		// 		} else {
-		// 			this.context.commit('SET_SEARCH_RESULTS', results);
-		// 			this.context.commit('SET_SHOW_SEARCH', true);
-		// 		}
-		// 	})
-		// 	.catch((e: any) => {
-		// 		/* eslint-disable no-console */
-		// 		console.log(e);
-		// 		this.context.commit('SET_IS_ERRORED', true);
-		// 	})
-		// 	.finally(() => {
-		// 		this.context.commit('SET_IS_LOADING', false);
-		// 	});
+		AppModule.setIsLoading(true);
+		MovieApi.search(search)
+			.then((results: any) => {
+				if (results.Error != null) {
+					throw Error('Error contacting movie api ' + JSON.stringify(results.Error)); // to-do: better
+				} else {
+					this.context.commit(FilterMutation.SET_SEARCH_RESULTS, results);
+					this.context.commit(FilterMutation.SET_SHOW_SEARCH, true);
+				}
+			})
+			.catch((e: any) => {
+				/* eslint-disable no-console */
+				console.log(e);
+				AppModule.setIsErrored(true);
+			})
+			.finally(() => {
+				AppModule.setIsLoading(false);
+			});
+	}
+
+	@Action
+	async clearSearch() {
+		this.context.commit(FilterMutation.SET_SEARCH_RESULTS, []);
 	}
 
 	@Mutation
@@ -87,10 +99,10 @@ class Filter extends VuexModule implements FilterState {
 		this.showSearch = val;
 	}
 
-	// @Mutation
-	// SET_SEARCH_RESULTS(val: SearchResult[]) {
-	// 	this.results = val;
-	// }
+	@Mutation
+	SET_SEARCH_RESULTS(val: Movie[]) {
+		this.results = val;
+	}
 }
 
 export const FilterModule = getModule(Filter);

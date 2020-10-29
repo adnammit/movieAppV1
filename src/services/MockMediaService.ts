@@ -20,6 +20,10 @@ class MockMediaService implements IMediaService {
 	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		return true;
 	}
+
+	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		return true;
+	}
 }
 
 export default new MockMediaService();

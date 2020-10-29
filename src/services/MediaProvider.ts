@@ -24,8 +24,9 @@ class MediaProvider {
 		const movies = [];
 
 		for (const item of userMovieData) {
-			const id: number = +item.imdbid;
+			const id: number = +item.imdbid; // this isn't imdb, it's movieDB
 			const movie: Movie = await MovieApi.getMovie(id);
+
 			movie.populateWithUser(item);
 			movies.push(movie);
 		}
@@ -35,6 +36,10 @@ class MediaProvider {
 
 	public updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		return this.service.updateUserMovie(userid, movie);
+	}
+
+	public addUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		return this.service.addUserMovie(userid, movie);
 	}
 }
 

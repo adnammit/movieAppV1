@@ -102,9 +102,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import Movie from '@/models/movie';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
+import Movie from '@/models/movie';
 
 @Component({})
 export default class Movies extends Vue {

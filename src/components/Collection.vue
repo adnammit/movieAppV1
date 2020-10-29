@@ -1,8 +1,8 @@
 <template>
 	<div class="container-fluid mt-4">
 		<FilterBar />
-		<!-- <Search v-if="showSearch" /> -->
 		<Movies />
+		<Search v-model="showSearch" />
 	</div>
 </template>
 
@@ -18,7 +18,7 @@ import Search from '@/components/Search.vue';
 	components: {
 		FilterBar,
 		Movies,
-		// Search,
+		Search,
 	},
 })
 export default class MoviesView extends Vue {
@@ -26,45 +26,12 @@ export default class MoviesView extends Vue {
 		return FilterModule.showSearch;
 	}
 
-	// async mounted() {}
+	private set showSearch(val: boolean) {
+		FilterModule.setShowSearch(val);
+	}
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/style/colors';
-
-.movie-table {
-	height: 90vh;
-	padding: 0;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-	.loading {
-		padding-top: 23px;
-	}
-	thead {
-		background-color: $tundora-shaft;
-		text-transform: uppercase;
-		tr th {
-			letter-spacing: 2px;
-			font-weight: 600;
-		}
-	}
-	td {
-		letter-spacing: 1px;
-		color: $alto;
-	}
-}
-.v-icon {
-	color: $silver;
-}
-.icon--deselected {
-	color: $dove-gray;
-}
-.favorite {
-	color: $turmeric;
-}
-.complete {
-	color: $goblin;
-}
 </style>
