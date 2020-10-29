@@ -2,10 +2,11 @@
 	<div class="container-fluid mt-4 filter-bar">
 		<div>
 			<v-toolbar dense short flat>
-				<!-- <v-toolbar-title>As You Wish</v-toolbar-title> -->
-				<v-btn text @click="toggleFavorites()">Favorites</v-btn>
-				<v-btn text @click="toggleTodo()">To Do</v-btn>
-				<v-btn text @click="resetFilter()">All</v-btn>
+				<!-- <v-toolbar-title class="mr-5">As you wish</v-toolbar-title> -->
+				<!-- <v-spacer></v-spacer> -->
+				<v-btn @click="resetFilter()" :text="!isUnfiltered">All</v-btn>
+				<v-btn @click="toggleFavorites()" :text="!isFilteredByFavorite">Favorites</v-btn>
+				<v-btn @click="toggleTodo()" :text="!isFilteredByTodo">To Do</v-btn>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
 					<v-text-field
@@ -45,8 +46,20 @@ export default class FilterBar extends Vue {
 		return AppModule.isLoading;
 	}
 
+	private get isFilteredByFavorite(): boolean {
+		return FilterModule.filterByFavorite;
+	}
+
+	private get isFilteredByTodo(): boolean {
+		return FilterModule.filterByTodo;
+	}
+
+	private get isUnfiltered(): boolean {
+		return !FilterModule.filterByTodo && !FilterModule.filterByFavorite;
+	}
+
 	// private clearSearch() {
-	// 	console.log('clear!');
+	// 	FilterModule.clearSearch();
 	// }
 
 	private doSearch(): void {
