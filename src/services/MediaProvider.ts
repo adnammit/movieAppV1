@@ -24,7 +24,7 @@ class MediaProvider {
 		const movies = [];
 
 		for (const item of userMovieData) {
-			const id: number = +item.imdbid; // this isn't imdb, it's movieDB
+			const id: number = +item.moviedbid;
 			const movie: Movie = await MovieApi.getMovie(id);
 
 			movie.populateWithUser(item);
