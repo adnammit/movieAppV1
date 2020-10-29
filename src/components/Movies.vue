@@ -22,7 +22,7 @@
 						<!-- Title -->
 						<td>{{ movie.title }}</td>
 						<!-- Genre Icons -->
-						<td>
+						<td class="genre-set">
 							<v-tooltip top>
 								<template v-slot:activator="{ on }">
 									<v-icon v-if="getGenreMatch(movie, 'Horror')" v-on="on">mdi-skull</v-icon>
@@ -139,7 +139,6 @@ export default class Movies extends Vue {
 @import '@/style/colors';
 
 .movie-table {
-	height: 90vh;
 	padding: 0;
 	align-items: center;
 	justify-content: center;
@@ -158,6 +157,9 @@ export default class Movies extends Vue {
 	td {
 		letter-spacing: 1px;
 		color: $alto;
+	}
+	td.genre-set .v-icon {
+		padding: 0 5px;
 	}
 }
 .v-icon {

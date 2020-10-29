@@ -113,7 +113,7 @@ A list of all movies in the collection. Filterable by:
     - SearchResult
         * SearchResult and CollectionItem inherit from some common base? they're v similar
     - consider making these interfaces
-* consolidate css for movies and search
+* CSS overhaul: consolidate css for movies and search
 * work flow:
     - default: display all in own collection
     - click Favorites to filter favorites

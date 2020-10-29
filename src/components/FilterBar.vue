@@ -4,9 +4,9 @@
 			<v-toolbar dense short flat>
 				<!-- <v-toolbar-title class="mr-5">As you wish</v-toolbar-title> -->
 				<!-- <v-spacer></v-spacer> -->
-				<v-btn @click="resetFilter()" :text="!isUnfiltered">All</v-btn>
-				<v-btn @click="toggleFavorites()" :text="!isFilteredByFavorite">Favorites</v-btn>
-				<v-btn @click="toggleTodo()" :text="!isFilteredByTodo">To Do</v-btn>
+				<v-btn @click="resetFilter()" rounded :text="!isUnfiltered">All</v-btn>
+				<v-btn @click="toggleFavorites()" rounded :text="!isFilteredByFavorite">Favorites</v-btn>
+				<v-btn @click="toggleTodo()" rounded :text="!isFilteredByTodo">To Do</v-btn>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
 					<v-text-field
@@ -17,7 +17,7 @@
 						label="Search"
 						v-model="search"
 						@keyup.native.enter="doSearch()"
-						append-icon-cb="mdi-magnify"
+						prepend-inner-icon="mdi-magnify"
 					></v-text-field>
 				</v-toolbar-items>
 			</v-toolbar>
@@ -57,10 +57,6 @@ export default class FilterBar extends Vue {
 	private get isUnfiltered(): boolean {
 		return !FilterModule.filterByTodo && !FilterModule.filterByFavorite;
 	}
-
-	// private clearSearch() {
-	// 	FilterModule.clearSearch();
-	// }
 
 	private doSearch(): void {
 		FilterModule.Search(this.search);
