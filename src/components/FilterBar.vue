@@ -4,8 +4,8 @@
 			<v-toolbar dense short flat>
 				<!-- <v-toolbar-title>As You Wish</v-toolbar-title> -->
 				<v-btn text @click="toggleFavorites()">Favorites</v-btn>
-				<v-btn text @click="toggleWatched()">To Do</v-btn>
-				<v-btn text>Add</v-btn>
+				<v-btn text @click="toggleTodo()">To Do</v-btn>
+				<v-btn text @click="resetFilter()">All</v-btn>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
 					<v-text-field
@@ -36,12 +36,9 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
-// import { SearchResult } from '@/models/search';
 
 @Component({})
 export default class FilterBar extends Vue {
-	private filterFavorites = false;
-	private filterWatched = false;
 	private search = '';
 
 	private get isLoading() {
@@ -57,11 +54,15 @@ export default class FilterBar extends Vue {
 	}
 
 	private toggleFavorites(): void {
-		this.filterFavorites = !this.filterFavorites;
+		FilterModule.toggleFavorites();
 	}
 
-	private toggleWatched(): void {
-		this.filterWatched = !this.filterWatched;
+	private toggleTodo(): void {
+		FilterModule.toggleTodo();
+	}
+
+	private resetFilter(): void {
+		FilterModule.resetFilter();
 	}
 }
 </script>

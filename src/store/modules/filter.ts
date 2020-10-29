@@ -2,32 +2,25 @@ import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-dec
 import store from '@/store';
 import { AppModule } from '@/store/modules/app';
 // import { SearchResult } from '@/models/search';
-// import { Collection } from '@/models/interfaces';
-// import Movie from '@/models/movie';
-// import AccountService from '@/services/AccountService';
 
 export interface FilterState {
-	// // move these to app?
-	// isErrored: boolean;
-	// isLoading: boolean;
+	filterByFavorite: boolean;
+	filterByTodo: boolean;
 	showSearch: boolean;
 }
 
 enum FilterMutation {
+	SET_FILTER_FAVORITES = 'SET_FILTER_FAVORITES',
+	SET_FILTER_TODO = 'SET_FILTER_TODO',
 	SET_SHOW_SEARCH = 'SET_SHOW_SEARCH',
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'FilterState' })
 class Filter extends VuexModule implements FilterState {
-	// public isErrored = false;
-	// public isLoading = false;
+	public filterByFavorite = false;
+	public filterByTodo = false;
 	public showSearch = false;
-	// private movies: Movie[] = [];
 	// private results: SearchResult[] = [];
-
-	// public get MovieList(): Movie[] {
-	// 	return this.movies;
-	// }
 
 	// public get SearchResults(): SearchResult[] {
 	// 	return this.results;
@@ -37,35 +30,25 @@ class Filter extends VuexModule implements FilterState {
 	// 	this.results = results;
 	// }
 
-	// @Action
-	// async setIsLoading(val: boolean) {
-	// 	this.context.commit('SET_IS_LOADING', val);
-	// }
+	@Action
+	async toggleFavorites() {
+		const val = !this.filterByFavorite;
+		this.context.commit(FilterMutation.SET_FILTER_FAVORITES, val);
+		if (val && this.filterByTodo) this.context.commit(FilterMutation.SET_FILTER_TODO, false);
+	}
 
-	// @Action
-	// async setIsErrored(val: boolean) {
-	// 	this.context.commit('SET_IS_ERRORED', val);
-	// }
+	@Action
+	async toggleTodo() {
+		const val = !this.filterByTodo;
+		this.context.commit(FilterMutation.SET_FILTER_TODO, val);
+		if (val && this.filterByFavorite) this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
+	}
 
-	// @Action
-	// public async LoadMovieList() {
-	// 	this.context.commit('SET_IS_LOADING', true);
-
-	// 	let collection: Collection = AccountService.getCollection();
-
-	// 	MovieApi.getMovies(collection)
-	// 		.then(movies => {
-	// 			this.context.commit('SET_MOVIES', movies);
-	// 		})
-	// 		.catch((e: any) => {
-	// 			/* eslint-disable no-console */
-	// 			console.log(e);
-	// 			this.context.commit('SET_IS_ERRORED', true);
-	// 		})
-	// 		.finally(() => {
-	// 			this.context.commit('SET_IS_LOADING', false);
-	// 		});
-	// }
+	@Action
+	async resetFilter() {
+		this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
+		this.context.commit(FilterMutation.SET_FILTER_TODO, false);
+	}
 
 	@Action
 	public async Search(search: string) {
@@ -89,25 +72,20 @@ class Filter extends VuexModule implements FilterState {
 		// 	});
 	}
 
-	// @Mutation
-	// SET_IS_LOADING(val: boolean) {
-	// 	this.isLoading = val;
-	// }
+	@Mutation
+	SET_FILTER_FAVORITES(val: boolean) {
+		this.filterByFavorite = val;
+	}
 
-	// @Mutation
-	// SET_IS_ERRORED(val: boolean) {
-	// 	this.isErrored = val;
-	// }
+	@Mutation
+	SET_FILTER_TODO(val: boolean) {
+		this.filterByTodo = val;
+	}
 
 	@Mutation
 	SET_SHOW_SEARCH(val: boolean) {
 		this.showSearch = val;
 	}
-
-	// @Mutation
-	// SET_MOVIES(val: Movie[]) {
-	// 	this.movies = val;
-	// }
 
 	// @Mutation
 	// SET_SEARCH_RESULTS(val: SearchResult[]) {

@@ -4,6 +4,7 @@ import MediaProvider from '@/services/MediaProvider';
 import oktaUser from '@/models/oktaUser';
 import Collection from '@/models/collection';
 import Movie from '@/models/movie';
+import { FilterModule } from '@/store/modules/filter';
 
 export interface AppState {
 	isErrored: boolean;
@@ -27,7 +28,8 @@ class App extends VuexModule implements AppState {
 	public collection = new Collection();
 
 	public get userMovies() {
-		return this.collection ? this.collection?.movies : [];
+		const movies = this.collection ? this.collection?.movies : [];
+		return movies.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true));
 	}
 
 	@Action

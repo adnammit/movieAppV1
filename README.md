@@ -86,21 +86,15 @@ A list of all movies in the collection. Filterable by:
 
 ## TO DO
 **start here**
-* get some movies loaded
-    - figure out the separation of concerns between movieApi, movieService, and provider
-    - i think you're making it too hard
-    - mock service/abstract class going to work? idk. probably a better way to do that
 * simplify error/loading state -- have appModule do it all, or does filter need it?
 * what does prod deployment for the app look like?
 * update mock data in data.json
+* test mock environment
 * how to map okta user to our user model?
     - email might be the best "pk"...
 * how much do we want to rely on imdb? should we store anything other than imdb id?
     - more robust to store the info (title, genre, year, etc) but not necessary
     - if we store it (or don't), we can write a script to get data from imdb and update values in db
-* mocking data for development and for demo:
-    - app will use `IMovieService` (and `IUserService` etc)
-    - depending on environment, load either `MockMovieService` which returns static results or `MovieService` which actually talks to the backend
 * work out how these objects should be mapped:
     - Collection -> look into using data stored in api db
     - Movie -> CollectionItem?
@@ -157,3 +151,7 @@ A list of all movies in the collection. Filterable by:
         documentary - video-vintage
 * typescript yo -- do some processing on movies
     - go through script and make sure you don't have dupe functions
+* mocking data for development and for demo:
+    - app will use `IMovieService` (and `IUserService` etc)
+    - depending on environment, load either `MockMovieService` which returns static results or `MovieService` which actually talks to the backend
+
