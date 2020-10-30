@@ -1,5 +1,5 @@
 export default interface UserMovie {
-	id: number;
+	movieid: number;
 	userid: number;
 	moviedbid: number;
 	imdbid: string;

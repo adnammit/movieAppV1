@@ -24,7 +24,8 @@ class MediaService implements IMediaService {
 
 	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		const request: any = {
-			id: movie.movieDbId,
+			id: movie.id,
+			rating: movie.rating,
 			watched: movie.watched,
 			favorite: movie.favorite,
 		};
