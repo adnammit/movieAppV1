@@ -1,7 +1,10 @@
 import axios from 'axios';
 import Movie from '@/models/movie';
+import MovieDto from '@/models/dto/movieDto';
 import Genre from '@/models/genre';
 import config from '@/config.json';
+import SearchDto from '@/models/dto/searchDto';
+import { SearchResult } from '@/models/searchResult';
 
 const url: string = config.movieDbUrl;
 const token: string = config.movieDbToken;
@@ -16,50 +19,64 @@ const requestMgr = axios.create({
 });
 
 class MovieApi {
-	public async search(search: string) {
+	private genres: Genre[] = [];
+
+	constructor() {
+		this.getGenres();
+	}
+
+	private async getGenres() {
+		requestMgr.get('genre/movie/list').then(res => {
+			this.genres = res.data.genres.map((g: any) => new Genre(g));
+		});
+	}
+
+	public async search(search: string): Promise<SearchResult[]> {
 		return requestMgr.get('search/multi?query=' + search).then(res => {
 			const data = res.data.results;
-			let movies: Movie[] = [];
-			data.forEach((d: any) => {
-				if (d.media_type == 'movie') movies.push(d as Movie);
-				/// need to do some extra handling for tv -- they don't have title,
-				/// have name instead
-				// if (d.media_type == 'movie' || d.media_type == 'tv') movies.push(d as Movie);
-				// else console.log('>> non-movie search result: ' + JSON.stringify(d));
+			let results: SearchResult[] = []; // return SearchResult
+
+			data.forEach((d: SearchDto) => {
+				if (d.media_type == 'movie') {
+					const parsed = this.parseSearchResult(d);
+					results.push(parsed);
+				}
 			});
-			movies = movies.sort((a, b) => {
+
+			results = results.sort((a, b) => {
 				return a.title.localeCompare(b.title);
 			});
-			console.log('>>> ' + JSON.stringify(movies));
-			return movies;
+
+			return results;
 		});
 	}
 
 	public async getMovie(id: number): Promise<Movie> {
 		return requestMgr.get('movie/' + id).then(res => {
-			console.log('>> raw movie ' + JSON.stringify(res.data));
-			return this.parseMovie(res.data);
+			return this.parseMovieResult(res.data as MovieDto);
 		});
 	}
 
-	private parseMovie(res: any): Movie {
+	private parseMovieResult(res: MovieDto): Movie {
 		let genres: Genre[] = [];
-		if (res.genres) {
-			genres = res.genres.map((g: any) => {
-				return new Genre(g);
-			});
+		if (res.genre_ids) {
+			genres = this.genres.filter(g => res.genre_ids.includes(g.id));
 		}
 
-		// let known = [];
-		// let unaccounted = genres.map((g) => {
-		//     g.Name
-		// });
-		// if(unaccounted.length > 0) {
-		//     console.log('>>> genres unaccounted for')
-		//     console.log();
-		// }
+		// to-do: log unaccounted for genres
 
 		return new Movie(res, genres);
+	}
+
+	private parseSearchResult(res: SearchDto): SearchResult {
+		let genres: Genre[] = [];
+		if (res.genre_ids) {
+			genres = this.genres.filter(g => res.genre_ids.includes(g.id));
+		}
+
+		// to-do: log unaccounted for genres
+
+		return new SearchResult(res, genres);
 	}
 }
 

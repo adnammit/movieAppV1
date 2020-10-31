@@ -34,7 +34,9 @@ class MediaService implements IMediaService {
 
 	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		const request: any = {
-			id: movie.movieDbId,
+			movieDbId: movie.movieDbId,
+			imdbId: movie.imdbId,
+			rating: movie.rating,
 			watched: movie.watched,
 			favorite: movie.favorite,
 		};

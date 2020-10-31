@@ -38,8 +38,16 @@ class MediaProvider {
 		return this.service.updateUserMovie(userid, movie);
 	}
 
-	public addUserMovie(userid: number, movie: Movie): Promise<boolean> {
-		return this.service.addUserMovie(userid, movie);
+	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		// maybe just don't require imdbid
+
+		const fullMovie = await MovieApi.getMovie(movie.movieDbId);
+		movie.imdbId = fullMovie.imdbId;
+
+		console.log('>> adding movie ' + JSON.stringify(movie));
+
+		return await true;
+		// return this.service.addUserMovie(userid, movie);
 	}
 }
 

@@ -1,3 +1,4 @@
+import MovieDto from '@/models/dto/movieDto';
 import UserMovie from '@/models/dto/userMovie';
 import Genre from '@/models/genre';
 
@@ -15,7 +16,7 @@ export default class Movie {
 	public watched = false;
 	public favorite = false;
 
-	constructor(dto: any, genres: Genre[]) {
+	constructor(dto: MovieDto, genres: Genre[]) {
 		this.title = dto.title;
 		this.releaseDate = dto.release_date;
 		this.movieDbId = dto.id;

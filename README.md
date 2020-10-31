@@ -86,9 +86,6 @@ A list of all movies in the collection. Filterable by:
 
 ## TO DO
 **start here**
-* your ids are all swizzled
-    - you've got your id, imdbid and movieDbId
-    - in your db/api, change imdbid -> movieDbId and store imdb too
 * search:
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
@@ -166,4 +163,6 @@ A list of all movies in the collection. Filterable by:
 * mocking data for development and for demo:
     - app will use `IMovieService` (and `IUserService` etc)
     - depending on environment, load either `MockMovieService` which returns static results or `MovieService` which actually talks to the backend
-
+* your ids are all swizzled
+    - you've got your id, imdbid and movieDbId
+    - in your db/api, change imdbid -> movieDbId and store imdb too

@@ -69,7 +69,7 @@ export default class SearchDialog extends Vue {
 	}
 
 	private addMovie(item: Movie) {
-		// AppModule.addUserMovie(item);
+		AppModule.addUserMovie(item);
 	}
 
 	@Watch('value')
