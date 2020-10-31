@@ -5,6 +5,7 @@ import oktaUser from '@/models/oktaUser';
 import Collection from '@/models/collection';
 import Movie from '@/models/movie';
 import { FilterModule } from '@/store/modules/filter';
+import SearchResult from '@/models/searchResult';
 
 export interface AppState {
 	isErrored: boolean;
@@ -70,40 +71,35 @@ class App extends VuexModule implements AppState {
 	@Action
 	public async updateUserMovie(movie: Movie) {
 		// let user = this.user
-		// this.context.commit(AppMutation.SET_IS_LOADING, true);
-		let success = true;
 		MediaProvider.updateUserMovie(1, movie)
 			.then((res: boolean) => {
-				success = res;
+				if (!res) {
+					throw Error('Error updating movie');
+				}
 			})
 			.catch((e: any) => {
 				/* eslint-disable no-console */
 				console.log(e);
 				this.context.commit(AppMutation.SET_IS_ERRORED, true);
 			});
-		// .finally(() => {
-		// 	this.context.commit(AppMutation.SET_IS_LOADING, false);
-		// });
 	}
 
 	@Action
-	public async addUserMovie(movie: Movie) {
+	public async addSearchAsMovie(item: SearchResult) {
 		// let user = this.user
-		// this.context.commit(AppMutation.SET_IS_LOADING, true);
-		// let success = true;
-		MediaProvider.addUserMovie(1, movie)
+		MediaProvider.addSearchAsMovie(1, item)
 			.then((res: boolean) => {
-				// success = res;
-				this.getUserCollection();
+				if (res) {
+					this.getUserCollection();
+				} else {
+					throw Error('Error saving search as user movie ');
+				}
 			})
 			.catch((e: any) => {
 				/* eslint-disable no-console */
 				console.log(e);
 				this.context.commit(AppMutation.SET_IS_ERRORED, true);
 			});
-		// .finally(() => {
-		// 	this.context.commit(AppMutation.SET_IS_LOADING, false);
-		// });
 	}
 
 	@Mutation

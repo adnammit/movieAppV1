@@ -2,12 +2,13 @@ import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-dec
 import store from '@/store';
 import { AppModule } from '@/store/modules/app';
 import MovieApi from '@/services/MovieApi';
-import Movie from '@/models/movie';
+import SearchResult from '@/models/searchResult';
 
 export interface FilterState {
 	filterByFavorite: boolean;
 	filterByTodo: boolean;
 	showSearch: boolean;
+	results: SearchResult[];
 }
 
 enum FilterMutation {
@@ -22,7 +23,7 @@ class Filter extends VuexModule implements FilterState {
 	public filterByFavorite = false;
 	public filterByTodo = false;
 	public showSearch = false;
-	public results: Movie[] = [];
+	public results: SearchResult[] = [];
 
 	// public get SearchResults(): SearchResult[] {
 	// 	return this.results;
@@ -63,7 +64,8 @@ class Filter extends VuexModule implements FilterState {
 		MovieApi.search(search)
 			.then((results: any) => {
 				if (results.Error != null) {
-					throw Error('Error contacting movie api ' + JSON.stringify(results.Error)); // to-do: better
+					/* eslint-disable no-console */
+					throw Error('Error contacting movie api ' + JSON.stringify(results.Error));
 				} else {
 					this.context.commit(FilterMutation.SET_SEARCH_RESULTS, results);
 					this.context.commit(FilterMutation.SET_SHOW_SEARCH, true);
@@ -100,7 +102,7 @@ class Filter extends VuexModule implements FilterState {
 	}
 
 	@Mutation
-	SET_SEARCH_RESULTS(val: Movie[]) {
+	SET_SEARCH_RESULTS(val: SearchResult[]) {
 		this.results = val;
 	}
 }

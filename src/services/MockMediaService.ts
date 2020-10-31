@@ -5,7 +5,6 @@ import IMediaService from '@/services/IMediaService';
 // import mockData from '@/data.json';
 
 class MockMediaService implements IMediaService {
-	// we don't actually need this right now cos we just use the okta user
 	public async getUsers(): Promise<User[]> {
 		return [];
 	}

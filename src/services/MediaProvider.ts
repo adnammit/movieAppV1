@@ -6,6 +6,7 @@ import MovieApi from '@/services/MovieApi';
 import IMediaService from '@/services/IMediaService';
 import MediaService from '@/services/MediaService';
 import MockMediaService from '@/services/MockMediaService';
+import SearchResult from '@/models/searchResult';
 
 class MediaProvider {
 	private service: IMediaService;
@@ -38,16 +39,12 @@ class MediaProvider {
 		return this.service.updateUserMovie(userid, movie);
 	}
 
-	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
-		// maybe just don't require imdbid
-
-		const fullMovie = await MovieApi.getMovie(movie.movieDbId);
-		movie.imdbId = fullMovie.imdbId;
+	public async addSearchAsMovie(userid: number, item: SearchResult): Promise<boolean> {
+		const movie = await MovieApi.getMovie(item.movieDbId);
 
 		console.log('>> adding movie ' + JSON.stringify(movie));
 
-		return await true;
-		// return this.service.addUserMovie(userid, movie);
+		return this.service.addUserMovie(userid, movie);
 	}
 }
 

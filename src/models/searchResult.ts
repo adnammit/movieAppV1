@@ -1,7 +1,7 @@
 import SearchDto from '@/models/dto/searchDto';
 import Genre from '@/models/genre';
 
-export class SearchResult {
+export default class SearchResult {
 	public title = '';
 	public releaseDate: Date = new Date();
 	public movieDbId = 0;

@@ -8,16 +8,16 @@
 					<v-simple-table>
 						<template v-slot:default>
 							<thead>
-								<tr>
-									<!-- checkbox: add -->
+								<!-- <tr>
+									checkbox: add
 									<th class="text-center">Title</th>
-									<!-- type -->
-									<!-- date -->
-									<!-- rating -->
-									<!-- genres -->
-									<!-- mark as watched -->
-									<!-- mark as favorite -->
-								</tr>
+									type
+									date
+									rating
+									genres
+									mark as watched
+									mark as favorite
+								</tr> -->
 							</thead>
 							<tbody>
 								<tr v-for="item in results" :key="item.id">
@@ -46,7 +46,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
-import Movie from '@/models/movie';
+import SearchResult from '@/models/searchResult';
 
 @Component({})
 export default class SearchDialog extends Vue {
@@ -64,12 +64,12 @@ export default class SearchDialog extends Vue {
 		this.showDialog = false;
 	}
 
-	private get results(): Movie[] {
+	private get results(): SearchResult[] {
 		return FilterModule.results;
 	}
 
-	private addMovie(item: Movie) {
-		AppModule.addUserMovie(item);
+	private addMovie(item: SearchResult) {
+		AppModule.addSearchAsMovie(item);
 	}
 
 	@Watch('value')

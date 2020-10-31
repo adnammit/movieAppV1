@@ -4,7 +4,7 @@ import MovieDto from '@/models/dto/movieDto';
 import Genre from '@/models/genre';
 import config from '@/config.json';
 import SearchDto from '@/models/dto/searchDto';
-import { SearchResult } from '@/models/searchResult';
+import SearchResult from '@/models/searchResult';
 
 const url: string = config.movieDbUrl;
 const token: string = config.movieDbToken;
