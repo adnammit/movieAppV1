@@ -42,6 +42,10 @@ class MediaService implements IMediaService {
 		};
 		return requestMgr.post('user/' + userid + '/movies', request);
 	}
+
+	public async deleteUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		return requestMgr.delete('user/' + userid + '/movies/' + movie.id);
+	}
 }
 
 export default new MediaService();

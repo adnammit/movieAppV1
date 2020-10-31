@@ -41,10 +41,11 @@ class MediaProvider {
 
 	public async addSearchAsMovie(userid: number, item: SearchResult): Promise<boolean> {
 		const movie = await MovieApi.getMovie(item.movieDbId);
-
-		console.log('>> adding movie ' + JSON.stringify(movie));
-
 		return this.service.addUserMovie(userid, movie);
+	}
+
+	public removeFromCollection(userid: number, movie: Movie): Promise<boolean> {
+		return this.service.deleteUserMovie(userid, movie);
 	}
 }
 

@@ -7,4 +7,5 @@ export default abstract class IMediaService {
 	abstract async getUserMovies(userid: number): Promise<UserMovie[]>;
 	abstract async updateUserMovie(userid: number, movie: Movie): Promise<boolean>;
 	abstract async addUserMovie(userid: number, movie: Movie): Promise<boolean>;
+	abstract async deleteUserMovie(userid: number, movie: Movie): Promise<boolean>;
 }

@@ -113,6 +113,24 @@ class App extends VuexModule implements AppState {
 			});
 	}
 
+	@Action
+	public async removeFromCollection(item: Movie) {
+		// let user = this.user
+		MediaProvider.removeFromCollection(1, item)
+			.then((res: boolean) => {
+				if (res) {
+					this.getUserCollection();
+				} else {
+					throw Error('Error removing movie from collection');
+				}
+			})
+			.catch((e: any) => {
+				/* eslint-disable no-console */
+				console.log(e);
+				this.context.commit(AppMutation.SET_IS_ERRORED, true);
+			});
+	}
+
 	@Mutation
 	SET_NO_DATA(val: boolean) {
 		this.isNoData = val;

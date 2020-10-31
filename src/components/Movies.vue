@@ -1,6 +1,6 @@
 <template>
 	<div class="text-center movie-table">
-		<v-data-table :headers="headers" :items="movies" :sort-by="['title']" hide-default-footer class="elevation-1">
+		<v-data-table :headers="headers" :items="movies" :sort-by="['title']" hide-default-footer>
 			<!-- Favorite -->
 			<template v-slot:[`item.favorite`]="{ item }">
 				<td @click="toggleFavorite(item)">
@@ -97,6 +97,13 @@
 					<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
 				</td>
 			</template>
+
+			<!-- Delete -->
+			<template v-slot:[`item.delete`]="{ item }">
+				<td @click="removeItem(item)">
+					<v-icon class="remove">mdi-delete</v-icon>
+				</td>
+			</template>
 		</v-data-table>
 	</div>
 </template>
@@ -110,13 +117,16 @@ import Movie from '@/models/movie';
 @Component({})
 export default class Movies extends Vue {
 	private headers = [
-		{ text: '', sortable: true, value: 'favorite' },
+		{ text: 'Favorite', sortable: true, value: 'favorite' },
 		{ text: 'Movie', sortable: true, value: 'title' },
 		{ text: 'Genre', sortable: false, value: 'genres' },
 		{ text: 'Year', sortable: true, value: 'releaseDate' },
 		{ text: 'Rating', sortable: true, value: 'userRating' },
 		{ text: 'Watched', sortable: true, value: 'watched' },
+		{ text: 'Remove', sortable: false, value: 'delete' },
 	];
+
+	private selected: Movie[] = [];
 
 	private get movies(): Movie[] {
 		return AppModule.userMovies;
@@ -139,6 +149,10 @@ export default class Movies extends Vue {
 		return false;
 	}
 
+	private removeItem(movie: Movie) {
+		AppModule.removeFromCollection(movie);
+	}
+
 	async mounted() {
 		await AppModule.getUserCollection();
 	}
@@ -149,7 +163,7 @@ export default class Movies extends Vue {
 @import '@/style/colors';
 @import '@/style/main';
 
-.movie-table {
+.movie-table::v-deep {
 	padding: 0;
 	align-items: center;
 	justify-content: center;
@@ -157,13 +171,11 @@ export default class Movies extends Vue {
 	.loading {
 		padding-top: 23px;
 	}
-	thead {
+	thead tr th {
 		background-color: $tundora-shaft;
 		text-transform: uppercase;
-		tr th {
-			letter-spacing: 2px;
-			font-weight: 600;
-		}
+		letter-spacing: 2px;
+		font-weight: 600;
 	}
 	td {
 		letter-spacing: 1px;
@@ -178,5 +190,8 @@ export default class Movies extends Vue {
 }
 .complete {
 	color: $goblin;
+}
+.remove:hover {
+	color: $cinnabar;
 }
 </style>
