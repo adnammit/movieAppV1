@@ -1,17 +1,22 @@
 <template>
 	<div class="text-center movie-table">
 		<v-data-table :headers="headers" :items="movies" :sort-by="['title']" hide-default-footer>
-			<!-- Favorite -->
-			<template v-slot:[`item.favorite`]="{ item }">
-				<td @click="toggleFavorite(item)">
-					<v-icon v-if="item.favorite" class="favorite">mdi-star-circle</v-icon>
-					<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
+			<!-- Watched -->
+			<template v-slot:[`item.watched`]="{ item }">
+				<td @click="toggleWatched(item)">
+					<v-icon v-if="item.watched" class="complete">mdi-check-bold</v-icon>
+					<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
 				</td>
 			</template>
 
 			<!-- Title -->
 			<template v-slot:[`item.title`]="{ item }">
 				<td>{{ item.title }}</td>
+			</template>
+
+			<!-- Year -->
+			<template v-slot:[`item.releaseDate`]="{ item }">
+				<td>{{ item.releaseDate | formatYear }}</td>
 			</template>
 
 			<!-- Genre Icons -->
@@ -80,21 +85,16 @@
 				</td>
 			</template>
 
-			<!-- Year -->
-			<template v-slot:[`item.releaseDate`]="{ item }">
-				<td>{{ item.releaseDate | formatYear }}</td>
-			</template>
-
 			<!-- Rating -->
 			<template v-slot:[`item.rating`]="{ item }">
 				<td>{{ item.rating }}</td>
 			</template>
 
-			<!-- Watched -->
-			<template v-slot:[`item.watched`]="{ item }">
-				<td @click="toggleWatched(item)">
-					<v-icon v-if="item.watched" class="complete">mdi-check-bold</v-icon>
-					<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
+			<!-- Favorite -->
+			<template v-slot:[`item.favorite`]="{ item }">
+				<td @click="toggleFavorite(item)">
+					<v-icon v-if="item.favorite" class="favorite">mdi-star-circle</v-icon>
+					<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
 				</td>
 			</template>
 
@@ -117,12 +117,12 @@ import Movie from '@/models/movie';
 @Component({})
 export default class Movies extends Vue {
 	private headers = [
-		{ text: 'Favorite', sortable: true, value: 'favorite' },
-		{ text: 'Movie', sortable: true, value: 'title' },
-		{ text: 'Genre', sortable: false, value: 'genres' },
-		{ text: 'Year', sortable: true, value: 'releaseDate' },
-		{ text: 'Rating', sortable: true, value: 'userRating' },
 		{ text: 'Watched', sortable: true, value: 'watched' },
+		{ text: 'Movie', sortable: true, value: 'title' },
+		{ text: 'Year', sortable: true, value: 'releaseDate' },
+		{ text: 'Genre', sortable: false, value: 'genres' },
+		{ text: 'Rating', sortable: true, value: 'userRating' },
+		{ text: 'Favorite', sortable: true, value: 'favorite' },
 		{ text: 'Remove', sortable: false, value: 'delete' },
 	];
 

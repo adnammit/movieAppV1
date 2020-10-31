@@ -7,6 +7,7 @@
 				<v-btn @click="resetFilter()" rounded :text="!isUnfiltered">All</v-btn>
 				<v-btn @click="toggleFavorites()" rounded :text="!isFilteredByFavorite">Favorites</v-btn>
 				<v-btn @click="toggleTodo()" rounded :text="!isFilteredByTodo">To Do</v-btn>
+				<v-btn @click="surprise()" rounded text><v-icon>mdi-pizza</v-icon></v-btn>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
 					<v-text-field
@@ -72,6 +73,10 @@ export default class FilterBar extends Vue {
 
 	private resetFilter(): void {
 		FilterModule.resetFilter();
+	}
+
+	private surprise(): void {
+		window.alert('Surpise!');
 	}
 }
 </script>
