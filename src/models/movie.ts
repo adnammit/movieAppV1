@@ -16,12 +16,12 @@ export default class Movie {
 	public watched = false;
 	public favorite = false;
 
-	constructor(dto: MovieDto, genres: Genre[]) {
+	constructor(dto: MovieDto) {
 		this.title = dto.title;
 		this.releaseDate = dto.release_date;
 		this.movieDbId = dto.id;
 		this.imdbId = dto.imdb_id;
-		this.genres = genres;
+		this.genres = dto.genres;
 		this.popularRating = dto.vote_average;
 		this.poster = dto.poster_path;
 		this.summary = dto.overview;

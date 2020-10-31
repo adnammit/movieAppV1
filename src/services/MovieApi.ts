@@ -34,7 +34,7 @@ class MovieApi {
 	public async search(search: string): Promise<SearchResult[]> {
 		return requestMgr.get('search/multi?query=' + search).then(res => {
 			const data = res.data.results;
-			let results: SearchResult[] = []; // return SearchResult
+			let results: SearchResult[] = [];
 
 			data.forEach((d: SearchDto) => {
 				if (d.media_type == 'movie') {
@@ -53,19 +53,8 @@ class MovieApi {
 
 	public async getMovie(id: number): Promise<Movie> {
 		return requestMgr.get('movie/' + id).then(res => {
-			return this.parseMovieResult(res.data as MovieDto);
+			return new Movie(res.data as MovieDto);
 		});
-	}
-
-	private parseMovieResult(res: MovieDto): Movie {
-		let genres: Genre[] = [];
-		if (res.genre_ids) {
-			genres = this.genres.filter(g => res.genre_ids.includes(g.id));
-		}
-
-		// to-do: log unaccounted for genres
-
-		return new Movie(res, genres);
 	}
 
 	private parseSearchResult(res: SearchDto): SearchResult {

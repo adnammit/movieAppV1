@@ -8,13 +8,15 @@ import { FilterModule } from '@/store/modules/filter';
 import SearchResult from '@/models/searchResult';
 
 export interface AppState {
-	isErrored: boolean;
+	isNoData: boolean;
 	isLoading: boolean;
+	isErrored: boolean;
 	currentUser: oktaUser;
 	collection: Collection;
 }
 
 enum AppMutation {
+	SET_NO_DATA = 'SET_NO_DATA',
 	SET_IS_LOADING = 'SET_IS_LOADING',
 	SET_IS_ERRORED = 'SET_IS_ERRORED',
 	SET_USER = 'SET_USER',
@@ -23,14 +25,19 @@ enum AppMutation {
 
 @Module({ dynamic: true, namespaced: true, store, name: 'AppState' })
 class App extends VuexModule implements AppState {
-	public isErrored = false;
+	public isNoData = false;
 	public isLoading = false;
+	public isErrored = false;
 	public currentUser = new oktaUser();
 	public collection = new Collection();
 
 	public get userMovies() {
 		const movies = this.collection ? this.collection?.movies : [];
 		return movies.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true));
+	}
+
+	public get noData() {
+		return this.isNoData;
 	}
 
 	@Action
@@ -53,10 +60,14 @@ class App extends VuexModule implements AppState {
 	@Action
 	public async getUserCollection() {
 		// let user = this.user
+		this.context.commit(AppMutation.SET_NO_DATA, false);
 		this.context.commit(AppMutation.SET_IS_LOADING, true);
 		MediaProvider.getUserCollection(1)
 			.then((res: Collection) => {
 				this.context.commit(AppMutation.SET_COLLECTION, res);
+				if (res.movies.length == 0) {
+					this.context.commit(AppMutation.SET_NO_DATA, true);
+				}
 			})
 			.catch((e: any) => {
 				/* eslint-disable no-console */
@@ -100,6 +111,11 @@ class App extends VuexModule implements AppState {
 				console.log(e);
 				this.context.commit(AppMutation.SET_IS_ERRORED, true);
 			});
+	}
+
+	@Mutation
+	SET_NO_DATA(val: boolean) {
+		this.isNoData = val;
 	}
 
 	@Mutation

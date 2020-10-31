@@ -23,63 +23,63 @@
 						<td>{{ movie.title }}</td>
 						<!-- Genre Icons -->
 						<td class="genre-set">
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Horror')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Horror')" v-on="on">mdi-skull</v-icon>
+									<v-icon v-on="on">mdi-skull</v-icon>
 								</template>
 								<span>Horror</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Science Fiction')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Science Fiction')" v-on="on">mdi-death-star-variant</v-icon>
+									<v-icon v-on="on">mdi-death-star-variant</v-icon>
 								</template>
 								<span>Sci-Fi</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Action')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Action')" v-on="on">mdi-karate</v-icon>
+									<v-icon v-on="on">mdi-karate</v-icon>
 								</template>
 								<span>Action</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Comedy')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Comedy')" v-on="on">mdi-emoticon-excited</v-icon>
+									<v-icon v-on="on">mdi-emoticon-excited</v-icon>
 								</template>
 								<span>Comedy</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Drama')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Drama')" v-on="on">mdi-drama</v-icon>
+									<v-icon v-on="on">mdi-guy-fawkes-mask</v-icon>
 								</template>
 								<span>Drama</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Romance')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Romance')" v-on="on">mdi-heart-multiple</v-icon>
+									<v-icon v-on="on">mdi-heart-multiple</v-icon>
 								</template>
 								<span>Romance</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Animation')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Animation')" v-on="on">mdi-brush</v-icon>
+									<v-icon v-on="on">mdi-brush</v-icon>
 								</template>
 								<span>Animation</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Western')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Western')" v-on="on">mdi-cactus</v-icon>
+									<v-icon v-on="on">mdi-cactus</v-icon>
 								</template>
 								<span>Western</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Documentary')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Documentary')" v-on="on">mdi-video-vintage</v-icon>
+									<v-icon v-on="on">mdi-video-vintage</v-icon>
 								</template>
 								<span>Documentary</span>
 							</v-tooltip>
-							<v-tooltip top>
+							<v-tooltip top v-if="getGenreMatch(movie, 'Family')">
 								<template v-slot:activator="{ on }">
-									<v-icon v-if="getGenreMatch(movie, 'Family')" v-on="on">mdi-account-child</v-icon>
+									<v-icon v-on="on">mdi-account-child</v-icon>
 								</template>
 								<span>Kids</span>
 							</v-tooltip>
@@ -137,6 +137,7 @@ export default class Movies extends Vue {
 
 <style scoped lang="scss">
 @import '@/style/colors';
+@import '@/style/main';
 
 .movie-table {
 	padding: 0;
@@ -161,12 +162,6 @@ export default class Movies extends Vue {
 	td.genre-set .v-icon {
 		padding: 0 5px;
 	}
-}
-.v-icon {
-	color: $silver;
-}
-.icon--deselected {
-	color: $dove-gray;
 }
 .favorite {
 	color: $turmeric;
