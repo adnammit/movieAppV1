@@ -11,7 +11,9 @@
 
 			<!-- Title -->
 			<template v-slot:[`item.title`]="{ item }">
-				<td>{{ item.title }}</td>
+				<td>
+					<v-btn @click="openDetail(item)" rounded text>{{ item.title }}</v-btn>
+				</td>
 			</template>
 
 			<!-- Year -->
@@ -97,14 +99,8 @@
 					<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
 				</td>
 			</template>
-
-			<!-- Delete -->
-			<template v-slot:[`item.delete`]="{ item }">
-				<td @click="removeItem(item)">
-					<v-icon class="remove">mdi-delete</v-icon>
-				</td>
-			</template>
 		</v-data-table>
+		<MovieDetail v-model="showDetail" />
 	</div>
 </template>
 
@@ -112,10 +108,17 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
+import MovieDetail from '@/components/MovieDetail.vue';
 import Movie from '@/models/movie';
 
-@Component({})
+@Component({
+	components: {
+		MovieDetail,
+	},
+})
 export default class Movies extends Vue {
+	private showDetail = false;
+
 	private headers = [
 		{ text: 'Watched', sortable: true, value: 'watched' },
 		{ text: 'Movie', sortable: true, value: 'title' },
@@ -123,10 +126,7 @@ export default class Movies extends Vue {
 		{ text: 'Genre', sortable: false, value: 'genres' },
 		{ text: 'Rating', sortable: true, value: 'userRating' },
 		{ text: 'Favorite', sortable: true, value: 'favorite' },
-		{ text: 'Remove', sortable: false, value: 'delete' },
 	];
-
-	private selected: Movie[] = [];
 
 	private get movies(): Movie[] {
 		return AppModule.userMovies;
@@ -149,8 +149,9 @@ export default class Movies extends Vue {
 		return false;
 	}
 
-	private removeItem(movie: Movie) {
-		AppModule.removeFromCollection(movie);
+	private openDetail(movie: Movie) {
+		AppModule.setSelectedMovie(movie);
+		this.showDetail = true;
 	}
 
 	async mounted() {
@@ -190,8 +191,5 @@ export default class Movies extends Vue {
 }
 .complete {
 	color: $goblin;
-}
-.remove:hover {
-	color: $cinnabar;
 }
 </style>

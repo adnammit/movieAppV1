@@ -21,6 +21,7 @@ enum AppMutation {
 	SET_IS_ERRORED = 'SET_IS_ERRORED',
 	SET_USER = 'SET_USER',
 	SET_COLLECTION = 'SET_COLLECTION',
+	SET_SELECTED_MOVIE = 'SET_SELECTED_MOVIE',
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'AppState' })
@@ -30,6 +31,7 @@ class App extends VuexModule implements AppState {
 	public isErrored = false;
 	public currentUser = new oktaUser();
 	public collection = new Collection();
+	public selectedMovie = new Movie();
 
 	public get userMovies() {
 		const movies = this.collection ? this.collection?.movies : [];
@@ -55,6 +57,11 @@ class App extends VuexModule implements AppState {
 		if (this.currentUser != user) {
 			this.context.commit(AppMutation.SET_USER, user);
 		}
+	}
+
+	@Action
+	public setSelectedMovie(val: Movie) {
+		this.context.commit(AppMutation.SET_SELECTED_MOVIE, val);
 	}
 
 	@Action
@@ -154,6 +161,11 @@ class App extends VuexModule implements AppState {
 	@Mutation
 	SET_COLLECTION(val: Collection) {
 		this.collection = val;
+	}
+
+	@Mutation
+	SET_SELECTED_MOVIE(val: Movie) {
+		this.selectedMovie = val;
 	}
 }
 

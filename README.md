@@ -101,15 +101,6 @@ A list of all movies in the collection. Filterable by:
 * test mock environment
 * how to map okta user to our user model?
     - email might be the best "pk"...
-* how much do we want to rely on imdb? should we store anything other than imdb id?
-    - more robust to store the info (title, genre, year, etc) but not necessary
-    - if we store it (or don't), we can write a script to get data from imdb and update values in db
-* work out how these objects should be mapped:
-    - Collection -> look into using data stored in api db
-    - Movie -> CollectionItem?
-    - SearchResult
-        * SearchResult and CollectionItem inherit from some common base? they're v similar
-    - consider making these interfaces
 * CSS overhaul: consolidate css for movies and search
 * work flow:
     - default: display all in own collection
@@ -124,24 +115,14 @@ A list of all movies in the collection. Filterable by:
             - hover shows details
             - clicking adds the movie... idk
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
-* what is your data model here? what will be retrieved via api vs stored?
-    - data that would need to be stored: check out `data.json`
-* add a store
-    - replace movies w/ results when searching
-    - pass around isLoading/isErrored maybe
-    - toggle favorites/unwatched views
-* search function
-    - display results in dropdown: whether they are in collection or not
-    - on click
-    - how to set error message (no results found)
+* add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
 * nice stuff
     - add genres:
         * mystery
     - do something with posters?
     - for a row, if click (hover?), display modal w/ poster and plot
     - add sort by genre
-    - allow sort by name, year, rating, watched, favorited
-* consolidate css into separate files if that makes sense
+    - add bechdel test search
 * wow yr build takes one million years... see if you can delete some unused packages or something
 
 ## DONE
@@ -158,6 +139,7 @@ A list of all movies in the collection. Filterable by:
         animation - draw
         western - cowboy, cactus
         documentary - video-vintage
+    - allow sort by name, year, rating, watched, favorited
 * typescript yo -- do some processing on movies
     - go through script and make sure you don't have dupe functions
 * mocking data for development and for demo:
@@ -166,3 +148,10 @@ A list of all movies in the collection. Filterable by:
 * your ids are all swizzled
     - you've got your id, imdbid and movieDbId
     - in your db/api, change imdbid -> movieDbId and store imdb too
+* add a store
+    - replace movies w/ results when searching
+    - pass around isLoading/isErrored maybe
+    - toggle favorites/unwatched views
+* how much do we want to rely on imdb? should we store anything other than imdb id?
+    - more robust to store the info (title, genre, year, etc) but not necessary
+    - if we store it (or don't), we can write a script to get data from imdb and update values in db
