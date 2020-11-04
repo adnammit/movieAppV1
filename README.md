@@ -59,6 +59,10 @@ npm i @types/okta__okta-vue
 
 ## Other Ref
 [Name That Color](http://chir.ag/projects/name-that-color/#42853E)
+[vue and font awesome](https://medium.com/front-end-weekly/how-to-use-fon-awesome-5-on-vuejs-project-ff0f28310821)
+[font awesome](https://fontawesome.com/icons)
+[material icons](https://cdn.materialdesignicons.com/1.1.34/)
+
 
 
 ## App Design
@@ -84,8 +88,23 @@ A list of all movies in the collection. Filterable by:
 * get a random unwatched movie
     - include optional filters by genre (random watched as well?)
 
+### Work Flow:
+* default: display all in own collection
+* click Favorites to filter favorites
+* click To Do to filter unwatched
+* running a search:
+    * show modal/table with results
+        - click/hover shows details
+    * batch edits to the search results:
+        - checking an item to add it to the collection displays favorite/watched/rating inputs. user can then select: favorite, watched, rate
+        - or: interacting with any of the action inputs auto adds the item, item can be manually added too
+        - clicking modal "Save" adds all selected items to the collection
+
+
 ## TO DO
 **start here**
+* create separate component for genres
+    - use in both collection and search results view
 * search:
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
@@ -93,35 +112,21 @@ A list of all movies in the collection. Filterable by:
     - batch edits? ability to go through and star/check watched/rate and then click "save to collection"?
     - maybe replace simple table with datatable -- add no-results state
     - more finesse in the search field
-* support tv
-* add filter by genre
-* simplify error/loading state -- have appModule do it all, or does filter need it?
 * what does prod deployment for the app look like?
+* refine our error state(s)
+* movie ux
+    - add filter by genre
 * update mock data in data.json
 * test mock environment
 * how to map okta user to our user model?
     - email might be the best "pk"...
 * CSS overhaul: consolidate css for movies and search
-* work flow:
-    - default: display all in own collection
-    - click Favorites to filter favorites
-    - click To Do to filter unwatched
-    - unclicking Favorites/To Do displays all in collection
-    - running a search either:
-        * replaces collection with search results (swap Movies.vue for Results.vue?)
-            - similar look to Movies but with a button to add the movie instead of watched/favorite flags
-            - clicking a search result will open a modal w more details
-        * show dropdown w basic info for each movie.
-            - hover shows details
-            - clicking adds the movie... idk
+* support tv in collection
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
 * add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
 * nice stuff
-    - add genres:
-        * mystery
     - do something with posters?
     - for a row, if click (hover?), display modal w/ poster and plot
-    - add sort by genre
     - add bechdel test search
 * wow yr build takes one million years... see if you can delete some unused packages or something
 
@@ -155,3 +160,4 @@ A list of all movies in the collection. Filterable by:
 * how much do we want to rely on imdb? should we store anything other than imdb id?
     - more robust to store the info (title, genre, year, etc) but not necessary
     - if we store it (or don't), we can write a script to get data from imdb and update values in db
+* simplify error/loading state -- have appModule do it all, or does filter need it?
