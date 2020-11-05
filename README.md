@@ -102,9 +102,8 @@ A list of all movies in the collection. Filterable by:
 
 
 ## TO DO
-**start here**
-* create separate component for genres
-    - use in both collection and search results view
+* create separate component for genres to use in both collection and search results view
+* create rating component
 * search:
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
