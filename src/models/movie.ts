@@ -11,7 +11,7 @@ export default class Movie {
 	public genres: Genre[] = [];
 	public popularRating?: number;
 	public poster = '';
-	public summary?: string = '';
+	public summary = '';
 	public rating?: number;
 	public watched = false;
 	public favorite = false;
@@ -24,7 +24,7 @@ export default class Movie {
 		this.genres = dto ? dto.genres : [];
 		this.popularRating = dto?.vote_average;
 		this.poster = dto ? dto.poster_path : '';
-		this.summary = dto?.overview;
+		this.summary = dto ? dto?.overview : '';
 		this.watched = false;
 		this.favorite = false;
 	}

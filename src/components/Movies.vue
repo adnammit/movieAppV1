@@ -116,10 +116,4 @@ export default class Movies extends Vue {
 		color: $alto;
 	}
 }
-.favorite {
-	color: $turmeric;
-}
-.complete {
-	color: $goblin;
-}
 </style>

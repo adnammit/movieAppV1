@@ -3,7 +3,7 @@ import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
 import vuetify from '@/plugins/vuetify';
-import moment from 'moment';
+import { formatYear } from '@/filters/formatYear';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -20,10 +20,4 @@ new Vue({
 	render: h => h(App),
 }).$mount('#app');
 
-Vue.filter('formatYear', (value: Date) => {
-	const date = moment(String(value));
-	if (date.isValid()) {
-		return date.year();
-	}
-	return '';
-});
+Vue.filter('formatYear', formatYear);

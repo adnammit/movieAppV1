@@ -12,9 +12,23 @@
 .hero h1 {
 	letter-spacing: 100px;
 }
-.v-icon {
+// global icon colors
+.v-icon, .svg-inline--fa {
 	color: $silver;
 }
 .icon--deselected {
 	color: $dove-gray;
+}
+.favorite {
+	color: $turmeric;
+}
+.complete {
+	color: $goblin;
+}
+// global button colors
+.save {
+	color: $curious-blue;
+}
+.remove {
+	color: $cinnabar;
 }
