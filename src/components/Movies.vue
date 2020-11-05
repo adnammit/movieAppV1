@@ -11,7 +11,18 @@
 
 			<!-- Title -->
 			<template v-slot:[`item.title`]="{ item }">
-				<v-btn @click="openDetail(item)" rounded text>{{ item.title }}</v-btn>
+				<v-tooltip left open-delay="500">
+					<template v-slot:activator="{ on }">
+						<v-btn @click="openDetail(item)" v-on="on" rounded text>{{ item.title }}</v-btn>
+					</template>
+					<v-img :src="getPosterPath(item)" style="max-height: 140px; max-width: 100px" contain>
+						<template v-slot:placeholder>
+							<v-row class="fill-height ma-0" align="center" justify="center">
+								<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+							</v-row>
+						</template>
+					</v-img>
+				</v-tooltip>
 			</template>
 
 			<!-- Year -->
@@ -49,6 +60,7 @@ import { FilterModule } from '@/store/modules/filter';
 import MovieDetail from '@/components/MovieDetail.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import Movie from '@/models/movie';
+import config from '@/config.json';
 
 @Component({
 	components: {
@@ -70,6 +82,10 @@ export default class Movies extends Vue {
 
 	private get movies(): Movie[] {
 		return AppModule.userMovies;
+	}
+
+	private getPosterPath(movie: Movie): string {
+		return `${config.movieDbBasePosterPath}${movie.poster}`;
 	}
 
 	private toggleFavorite(movie: Movie): void {

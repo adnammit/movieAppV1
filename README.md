@@ -60,9 +60,9 @@ npm i @types/okta__okta-vue
 ## Other Ref
 [Name That Color](http://chir.ag/projects/name-that-color/#42853E)
 [vue and font awesome](https://medium.com/front-end-weekly/how-to-use-fon-awesome-5-on-vuejs-project-ff0f28310821)
-[font awesome](https://fontawesome.com/icons)
 [material icons](https://cdn.materialdesignicons.com/1.1.34/)
-
+[font awesome](https://fontawesome.com/icons)
+[using font awesome with vue](https://github.com/FortAwesome/vue-fontawesome)
 
 
 ## App Design
