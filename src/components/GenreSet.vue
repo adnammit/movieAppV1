@@ -1,114 +1,114 @@
 <template>
 	<div class="genre-set align-center">
-		<v-tooltip top v-if="getGenreMatch('Action')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Action')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="car-crash" />
 			</template>
 			<span>Action</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Adventure')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Adventure')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="hiking" />
 			</template>
 			<span>Adventure</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Animation')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Animation')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="paint-brush" />
 			</template>
 			<span>Animation</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Comedy')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Comedy')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="laugh-beam" />
 			</template>
 			<span>Comedy</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Crime')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Crime')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="gavel" />
 			</template>
 			<span>Crime</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Documentary')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Documentary')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="film" />
 			</template>
 			<span>Documentary</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Drama')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Drama')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="theater-masks" />
 			</template>
 			<span>Drama</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Family')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Family')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="baby" />
 			</template>
 			<span>Kids</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Fantasy')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Fantasy')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="hat-wizard" />
 			</template>
 			<span>Fantasy</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('History')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('History')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="scroll" />
 			</template>
 			<span>History</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Horror')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Horror')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="skull" />
 			</template>
 			<span>Horror</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Music')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Music')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="music" />
 			</template>
 			<span>Music</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Mystery')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Mystery')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="search" />
 			</template>
 			<span>Mystery</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Romance')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Romance')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="heart" />
 			</template>
 			<span>Romance</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Science Fiction')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Science Fiction')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="robot" />
 			</template>
 			<span>Sci-Fi</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('TV Movie')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('TV Movie')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="tv" />
 			</template>
 			<span>TV Movie</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Thriller')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Thriller')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="exclamation-triangle" />
 			</template>
 			<span>Thriller</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('War')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('War')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="fighter-jet" />
 			</template>
 			<span>War</span>
 		</v-tooltip>
-		<v-tooltip top v-if="getGenreMatch('Western')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Western')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="hat-cowboy-side" />
 			</template>
