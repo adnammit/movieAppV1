@@ -32,3 +32,8 @@
 .remove {
 	color: $cinnabar;
 }
+// global btn styles
+.v-card__actions .v-btn {
+	margin: auto 5px;
+	padding: 5px 9px;
+}

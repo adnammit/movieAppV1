@@ -1,6 +1,6 @@
 <template>
 	<v-row justify="center">
-		<v-dialog v-model="showDialog" scrollable max-width="30vw">
+		<v-dialog v-model="showDialog" scrollable max-width="40vw">
 			<v-card class="movie-details">
 				<v-card-title>{{ title }}</v-card-title>
 				<v-card-subtitle>{{ subtitle }}</v-card-subtitle>
@@ -23,9 +23,21 @@
 									<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
 								</div>
 							</v-col>
+							<v-col>
+								this is my rating
+							</v-col>
 						</v-row>
 						<v-row>
-							<v-col>
+							<v-col cols="6">
+								<v-img :src="posterPath" class="poster" contain>
+									<template v-slot:placeholder>
+										<v-row class="fill-height ma-0" align="center" justify="center">
+											<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+										</v-row>
+									</template>
+								</v-img>
+							</v-col>
+							<v-col cols="6" class="align-self-center">
 								{{ description }}
 							</v-col>
 						</v-row>
@@ -52,6 +64,7 @@ import { formatYear } from '@/filters/formatYear';
 import GenreSet from '@/components/GenreSet.vue';
 import Movie from '@/models/movie';
 import Genre from '@/models/genre';
+import config from '@/config.json';
 
 @Component({
 	components: {
@@ -82,6 +95,10 @@ export default class MovieDetail extends Vue {
 
 	private get description(): string {
 		return AppModule.selectedMovie.summary;
+	}
+
+	private get posterPath(): string {
+		return `${config.movieDbBasePosterPath}${AppModule.selectedMovie.poster}`;
 	}
 
 	private get showDialog(): boolean {
@@ -141,12 +158,15 @@ export default class MovieDetail extends Vue {
 	.v-card__subtitle {
 		letter-spacing: 1px;
 	}
-
 	.v-card__text {
 		height: 60vh;
 		.row {
 			padding: 10px 30px;
 		}
+	}
+	.poster {
+		max-height: 40vh;
+		display: flex;
 	}
 }
 </style>
