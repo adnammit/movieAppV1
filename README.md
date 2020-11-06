@@ -58,11 +58,10 @@ npm i @types/okta__okta-vue
 ```
 
 ## Other Ref
-[Name That Color](http://chir.ag/projects/name-that-color/#42853E)
-[vue and font awesome](https://medium.com/front-end-weekly/how-to-use-fon-awesome-5-on-vuejs-project-ff0f28310821)
-[material icons](https://cdn.materialdesignicons.com/1.1.34/)
-[font awesome](https://fontawesome.com/icons)
-[using font awesome with vue](https://github.com/FortAwesome/vue-fontawesome)
+* [Name That Color](http://chir.ag/projects/name-that-color/#42853E)
+* [material icons](https://cdn.materialdesignicons.com/1.1.34/)
+* [font awesome](https://fontawesome.com/icons)
+* [using font awesome with vue](https://github.com/FortAwesome/vue-fontawesome)
 
 
 ## App Design
@@ -86,7 +85,6 @@ A list of all movies in the collection. Filterable by:
 * set watched flag for movies in collection
 * set favorite flag for movies in collection
 * get a random unwatched movie
-    - include optional filters by genre (random watched as well?)
 
 ### Work Flow:
 * default: display all in own collection
@@ -100,10 +98,9 @@ A list of all movies in the collection. Filterable by:
         - or: interacting with any of the action inputs auto adds the item, item can be manually added too
         - clicking modal "Save" adds all selected items to the collection
 
-
-## TO DO
-* create separate component for genres to use in both collection and search results view
+### TO DO
 * create rating component
+* support tv in collection
 * search:
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
@@ -113,50 +110,14 @@ A list of all movies in the collection. Filterable by:
     - more finesse in the search field
 * what does prod deployment for the app look like?
 * refine our error state(s)
-* movie ux
-    - add filter by genre
 * update mock data in data.json
 * test mock environment
 * how to map okta user to our user model?
     - email might be the best "pk"...
 * CSS overhaul: consolidate css for movies and search
-* support tv in collection
+
+### Feature List:
+* add filter by genre
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
 * add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
-* nice stuff
-    - do something with posters?
-    - for a row, if click (hover?), display modal w/ poster and plot
-    - add bechdel test search
 * wow yr build takes one million years... see if you can delete some unused packages or something
-
-## DONE
-* refactor to use a centralized request mgr for cleaner code -- let components just be components
-* re-write to use vuetify instead of bootstrap
-* nice stuff
-    - how to represent genres? icons?
-        horror - ghost
-        scifi - death-star-variant
-        action - car-sports, gun, run-fast
-        comedy - emoticon-lol, emoticon-lol-outline
-        drama - drama
-        romance - heart-multiple
-        animation - draw
-        western - cowboy, cactus
-        documentary - video-vintage
-    - allow sort by name, year, rating, watched, favorited
-* typescript yo -- do some processing on movies
-    - go through script and make sure you don't have dupe functions
-* mocking data for development and for demo:
-    - app will use `IMovieService` (and `IUserService` etc)
-    - depending on environment, load either `MockMovieService` which returns static results or `MovieService` which actually talks to the backend
-* your ids are all swizzled
-    - you've got your id, imdbid and movieDbId
-    - in your db/api, change imdbid -> movieDbId and store imdb too
-* add a store
-    - replace movies w/ results when searching
-    - pass around isLoading/isErrored maybe
-    - toggle favorites/unwatched views
-* how much do we want to rely on imdb? should we store anything other than imdb id?
-    - more robust to store the info (title, genre, year, etc) but not necessary
-    - if we store it (or don't), we can write a script to get data from imdb and update values in db
-* simplify error/loading state -- have appModule do it all, or does filter need it?
