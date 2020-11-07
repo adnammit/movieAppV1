@@ -7,38 +7,50 @@
 				<v-divider></v-divider>
 				<v-card-text>
 					<v-container>
-						<v-row>
-							<v-col>
-								<GenreSet v-bind:genres="genres" />
-							</v-col>
-							<v-col>
+						<v-row justify="center" align="center">
+							<v-spacer></v-spacer>
+							<v-col cols="auto">
 								<div @click="toggleWatched()">
 									<v-icon v-if="watched" class="complete">mdi-check-bold</v-icon>
 									<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
 								</div>
 							</v-col>
-							<v-col>
+							<v-spacer></v-spacer>
+							<v-col cols="auto">
+								<v-rating class="rating-selector" v-model="rating" hover background-color="blue lighten-3" color="pink"></v-rating>
+							</v-col>
+							<v-spacer></v-spacer>
+							<v-col cols="auto">
 								<div @click="toggleFavorite()">
 									<v-icon v-if="favorite" class="favorite">mdi-star-circle</v-icon>
 									<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
 								</div>
 							</v-col>
-							<v-col>
-								this is my rating
-							</v-col>
+							<v-spacer></v-spacer>
 						</v-row>
 						<v-row>
 							<v-col cols="6">
-								<v-img :src="posterPath" class="poster" contain>
-									<template v-slot:placeholder>
-										<v-row class="fill-height ma-0" align="center" justify="center">
-											<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-										</v-row>
-									</template>
-								</v-img>
+								<a :href="posterPath" target="_blank">
+									<v-img :src="posterPath" class="poster" contain>
+										<template v-slot:placeholder>
+											<v-row class="fill-height ma-0" align="center" justify="center">
+												<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+											</v-row>
+										</template>
+									</v-img>
+								</a>
 							</v-col>
 							<v-col cols="6" class="align-self-center">
-								{{ description }}
+								<v-row>
+									<v-col align-self="center">
+										<GenreSet v-bind:genres="genres" />
+									</v-col>
+								</v-row>
+								<v-row>
+									<v-col align-self="center">
+										{{ description }}
+									</v-col>
+								</v-row>
 							</v-col>
 						</v-row>
 					</v-container>
@@ -46,7 +58,7 @@
 				<v-divider></v-divider>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn @click.stop="removeItem" class="remove">
+					<v-btn @click.stop="showConfirmRemove" class="remove">
 						<v-icon>mdi-delete</v-icon>
 					</v-btn>
 					<v-btn @click.stop="closeDialog">Cancel</v-btn>
@@ -65,6 +77,7 @@ import GenreSet from '@/components/GenreSet.vue';
 import Movie from '@/models/movie';
 import Genre from '@/models/genre';
 import config from '@/config.json';
+import App from '@/App.vue';
 
 @Component({
 	components: {
@@ -77,6 +90,7 @@ export default class MovieDetail extends Vue {
 
 	private favorite = false;
 	private watched = false;
+	private rating = 0;
 
 	private get title(): string {
 		return AppModule.selectedMovie.title;
@@ -120,6 +134,7 @@ export default class MovieDetail extends Vue {
 	private reset() {
 		this.favorite = AppModule.selectedMovie.favorite;
 		this.watched = AppModule.selectedMovie.watched;
+		this.rating = AppModule.selectedMovie.rating;
 	}
 
 	private closeDialog() {
@@ -130,13 +145,18 @@ export default class MovieDetail extends Vue {
 		const movie = Object.assign(AppModule.selectedMovie);
 		movie.favorite = this.favorite;
 		movie.watched = this.watched;
-		// movie.rating = this.rating;
+		movie.rating = this.rating;
 		await AppModule.updateUserMovie(movie);
 		await AppModule.getUserCollection();
 		this.closeDialog();
 	}
 
-	private removeItem(movie: Movie) {
+	private showConfirmRemove() {
+		// add confirmation dlg - simpleAlert
+		this.removeItem();
+	}
+
+	private removeItem() {
 		AppModule.removeFromCollection(AppModule.selectedMovie);
 		this.closeDialog();
 	}

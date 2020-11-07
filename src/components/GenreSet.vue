@@ -74,7 +74,7 @@
 		</v-tooltip>
 		<v-tooltip top open-delay="300" v-if="getGenreMatch('Mystery')">
 			<template v-slot:activator="{ on }">
-				<font-awesome-icon v-on="on" icon="search" />
+				<font-awesome-icon v-on="on" icon="question-circle" />
 			</template>
 			<span>Mystery</span>
 		</v-tooltip>
@@ -119,7 +119,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
-import Movie from '@/models/movie';
 import Genre from '@/models/genre';
 
 @Component({})

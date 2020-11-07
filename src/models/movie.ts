@@ -12,7 +12,7 @@ export default class Movie {
 	public popularRating?: number;
 	public poster = '';
 	public summary = '';
-	public rating?: number;
+	public rating = 0;
 	public watched = false;
 	public favorite = false;
 
