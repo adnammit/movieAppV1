@@ -3,7 +3,6 @@
 		<v-dialog v-model="showDialog" scrollable max-width="40vw">
 			<v-card class="movie-details">
 				<v-card-title>{{ title }}</v-card-title>
-				<v-card-subtitle>{{ subtitle }}</v-card-subtitle>
 				<v-divider></v-divider>
 				<v-card-text>
 					<v-container>
@@ -28,7 +27,7 @@
 							</v-col>
 							<v-spacer></v-spacer>
 						</v-row>
-						<v-row>
+						<v-row class="details--body">
 							<v-col cols="6">
 								<a :href="posterPath" target="_blank">
 									<v-img :src="posterPath" class="poster" contain>
@@ -42,10 +41,18 @@
 							</v-col>
 							<v-col cols="6" class="align-self-center">
 								<v-row>
+									<v-col align-self="center"> {{ year }} • {{ popularRating }} • <GenreSet v-bind:genres="genres" /> </v-col>
+								</v-row>
+								<!-- <v-row>
+									<v-col align-self="center">
+										{{ popularRating }}
+									</v-col>
+								</v-row>
+								<v-row>
 									<v-col align-self="center">
 										<GenreSet v-bind:genres="genres" />
 									</v-col>
-								</v-row>
+								</v-row> -->
 								<v-row>
 									<v-col align-self="center">
 										{{ description }}
@@ -105,11 +112,12 @@ export default class MovieDetail extends Vue {
 		return AppModule.selectedMovie.title;
 	}
 
-	private get subtitle(): string {
-		// add:
-		//	runtime
-		//	original_language
-		return `${formatYear(AppModule.selectedMovie.releaseDate)} • IMDB Rating: ${AppModule.selectedMovie.popularRating}`;
+	private get year(): string {
+		return formatYear(AppModule.selectedMovie.releaseDate);
+	}
+
+	private get popularRating(): string {
+		return String(AppModule.selectedMovie.popularRating);
 	}
 
 	private get genres(): Genre[] {
@@ -188,7 +196,9 @@ export default class MovieDetail extends Vue {
 	}
 	.v-card__text {
 		height: 60vh;
-		.row {
+		padding: 10px 30px;
+
+		.row.details--body {
 			padding: 10px 30px;
 		}
 	}
