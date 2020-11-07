@@ -41,7 +41,10 @@
 							</v-col>
 							<v-col cols="6" class="align-self-center">
 								<v-row>
-									<v-col align-self="center"> {{ year }} • {{ popularRating }} • <GenreSet v-bind:genres="genres" /> </v-col>
+									<v-col align-self="center"> {{ year }} • {{ popularRating }} </v-col>
+								</v-row>
+								<v-row>
+									<v-col align-self="center"> <GenreSet v-bind:genres="genres" /> </v-col>
 								</v-row>
 								<v-row>
 									<v-col align-self="center">
@@ -109,7 +112,7 @@ export default class MovieDetail extends Vue {
 	}
 
 	private get popularRating(): string {
-		return String(AppModule.selectedMovie.popularRating);
+		return 'IMDB Rating ' + String(AppModule.selectedMovie.popularRating);
 	}
 
 	private get genres(): Genre[] {
