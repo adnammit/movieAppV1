@@ -58,7 +58,7 @@
 				<v-divider></v-divider>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn @click.stop="showConfirmRemove" class="remove">
+					<v-btn @click.stop="confirmRemove" class="remove">
 						<v-icon>mdi-delete</v-icon>
 					</v-btn>
 					<v-btn @click.stop="closeDialog">Cancel</v-btn>
@@ -66,6 +66,7 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		<SimpleAlert v-model="alert" :titleText="alertTitle" :messageText="alertMessage" :onConfirm="remove" />
 	</v-row>
 </template>
 
@@ -74,6 +75,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { formatYear } from '@/filters/formatYear';
 import GenreSet from '@/components/GenreSet.vue';
+import SimpleAlert from '@/components/SimpleAlert.vue';
 import Movie from '@/models/movie';
 import Genre from '@/models/genre';
 import config from '@/config.json';
@@ -82,6 +84,7 @@ import App from '@/App.vue';
 @Component({
 	components: {
 		GenreSet,
+		SimpleAlert,
 	},
 })
 export default class MovieDetail extends Vue {
@@ -91,6 +94,12 @@ export default class MovieDetail extends Vue {
 	private favorite = false;
 	private watched = false;
 	private rating = 0;
+	private alert = false;
+	private alertTitle = 'Confirm Removal';
+
+	private get alertMessage(): string {
+		return 'Are you sure you want "' + AppModule.selectedMovie.title + '" out of your life forever?';
+	}
 
 	private get title(): string {
 		return AppModule.selectedMovie.title;
@@ -151,12 +160,11 @@ export default class MovieDetail extends Vue {
 		this.closeDialog();
 	}
 
-	private showConfirmRemove() {
-		// add confirmation dlg - simpleAlert
-		this.removeItem();
+	private confirmRemove() {
+		this.alert = true;
 	}
 
-	private removeItem() {
+	private remove() {
 		AppModule.removeFromCollection(AppModule.selectedMovie);
 		this.closeDialog();
 	}
