@@ -37,8 +37,7 @@
 
 			<!-- Rating -->
 			<template v-slot:[`item.rating`]="{ item }">
-				<!-- maybe remove td -->
-				<td>{{ item.rating }}</td>
+				<v-rating v-model="item.rating" @input="updateRating($event, item)" hover background-color="blue lighten-3" color="pink"></v-rating>
 			</template>
 
 			<!-- Favorite -->
@@ -57,15 +56,15 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
-import MovieDetail from '@/components/MovieDetail.vue';
 import GenreSet from '@/components/GenreSet.vue';
+import MovieDetail from '@/components/MovieDetail.vue';
 import Movie from '@/models/movie';
 import config from '@/config.json';
 
 @Component({
 	components: {
-		MovieDetail,
 		GenreSet,
+		MovieDetail,
 	},
 })
 export default class Movies extends Vue {
@@ -76,7 +75,7 @@ export default class Movies extends Vue {
 		{ text: 'Movie', sortable: true, value: 'title' },
 		{ text: 'Year', sortable: true, value: 'releaseDate' },
 		{ text: 'Genre', sortable: false, value: 'genres', align: 'center' },
-		{ text: 'Rating', sortable: true, value: 'userRating' },
+		{ text: 'Rating', sortable: true, value: 'rating' },
 		{ text: 'Favorite', sortable: true, value: 'favorite' },
 	];
 
@@ -95,6 +94,11 @@ export default class Movies extends Vue {
 
 	private toggleWatched(movie: Movie): void {
 		movie.watched = !movie.watched;
+		AppModule.updateUserMovie(movie);
+	}
+
+	private updateRating(val: number, movie: Movie): void {
+		movie.rating = val;
 		AppModule.updateUserMovie(movie);
 	}
 

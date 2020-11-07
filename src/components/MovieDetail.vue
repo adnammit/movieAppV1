@@ -16,7 +16,7 @@
 							</v-col>
 							<v-spacer></v-spacer>
 							<v-col cols="auto">
-								<v-rating class="rating-selector" v-model="rating" hover background-color="blue lighten-3" color="pink"></v-rating>
+								<Rating v-model="rating" />
 							</v-col>
 							<v-spacer></v-spacer>
 							<v-col cols="auto">
@@ -43,16 +43,6 @@
 								<v-row>
 									<v-col align-self="center"> {{ year }} • {{ popularRating }} • <GenreSet v-bind:genres="genres" /> </v-col>
 								</v-row>
-								<!-- <v-row>
-									<v-col align-self="center">
-										{{ popularRating }}
-									</v-col>
-								</v-row>
-								<v-row>
-									<v-col align-self="center">
-										<GenreSet v-bind:genres="genres" />
-									</v-col>
-								</v-row> -->
 								<v-row>
 									<v-col align-self="center">
 										{{ description }}
@@ -81,6 +71,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { formatYear } from '@/filters/formatYear';
+import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import SimpleAlert from '@/components/SimpleAlert.vue';
 import Movie from '@/models/movie';
@@ -90,6 +81,7 @@ import App from '@/App.vue';
 
 @Component({
 	components: {
+		Rating,
 		GenreSet,
 		SimpleAlert,
 	},
