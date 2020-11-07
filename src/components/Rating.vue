@@ -1,5 +1,9 @@
 <template>
-	<v-rating v-model="rating" hover background-color="blue lighten-3" color="pink"></v-rating>
+	<v-rating v-model="rating">
+		<template v-slot:item="props">
+			<v-icon :color="props.isFilled ? 'pink' : 'blue lighten-3'" @click="updateRating(props)">{{ props.isFilled ? 'mdi-star' : 'mdi-star-outline' }}</v-icon>
+		</template>
+	</v-rating>
 </template>
 
 <script lang="ts">
@@ -15,6 +19,11 @@ export default class Rating extends Vue {
 
 	private set rating(value: number) {
 		this.$emit('input', value);
+	}
+
+	private updateRating(props: any) {
+		const rating = props.index + 1;
+		this.rating = rating == this.value ? 0 : rating;
 	}
 }
 </script>
