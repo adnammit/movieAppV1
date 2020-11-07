@@ -37,7 +37,7 @@
 
 			<!-- Rating -->
 			<template v-slot:[`item.rating`]="{ item }">
-				<v-rating v-model="item.rating" @input="updateRating($event, item)" hover background-color="blue lighten-3" color="pink"></v-rating>
+				<Rating v-model="item.rating" @input="updateRating(item)" />
 			</template>
 
 			<!-- Favorite -->
@@ -56,6 +56,7 @@
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
 import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
+import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import MovieDetail from '@/components/MovieDetail.vue';
 import Movie from '@/models/movie';
@@ -63,6 +64,7 @@ import config from '@/config.json';
 
 @Component({
 	components: {
+		Rating,
 		GenreSet,
 		MovieDetail,
 	},
@@ -97,8 +99,7 @@ export default class Movies extends Vue {
 		AppModule.updateUserMovie(movie);
 	}
 
-	private updateRating(val: number, movie: Movie): void {
-		movie.rating = val;
+	private updateRating(movie: Movie): void {
 		AppModule.updateUserMovie(movie);
 	}
 

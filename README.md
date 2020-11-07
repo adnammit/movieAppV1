@@ -99,7 +99,6 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
-* create rating component
 * support tv in collection
 * search:
     - add actions: details, add to collection
