@@ -30,7 +30,7 @@
 				{{ item.releaseDate | formatYear }}
 			</template>
 
-			<!-- Genre Icons -->
+			<!-- Genres -->
 			<template v-slot:[`item.genres`]="{ item }">
 				<GenreSet v-bind:genres="item.genres" />
 			</template>

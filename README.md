@@ -117,7 +117,6 @@ A list of all movies in the collection. Filterable by:
 
 ### Feature List:
 * implement Surprise!
-* click poster to see full-size (opens as link in new window now -- change to just make it a big modal)
 * add filter by genre
 * add comments
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix

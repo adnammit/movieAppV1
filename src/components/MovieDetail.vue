@@ -29,15 +29,13 @@
 						</v-row>
 						<v-row class="details--body">
 							<v-col cols="6">
-								<a :href="posterPath" target="_blank">
-									<v-img :src="posterPath" class="poster" contain>
-										<template v-slot:placeholder>
-											<v-row class="fill-height ma-0" align="center" justify="center">
-												<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-											</v-row>
-										</template>
-									</v-img>
-								</a>
+								<v-img :src="posterPath" class="poster" contain @click="showPoster">
+									<template v-slot:placeholder>
+										<v-row class="fill-height ma-0" align="center" justify="center">
+											<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+										</v-row>
+									</template>
+								</v-img>
 							</v-col>
 							<v-col cols="6" class="align-self-center">
 								<v-row>
@@ -67,6 +65,7 @@
 			</v-card>
 		</v-dialog>
 		<SimpleAlert v-model="alert" :titleText="alertTitle" :messageText="alertMessage" :onConfirm="remove" />
+		<Poster v-model="poster" :path="posterPath" />
 	</v-row>
 </template>
 
@@ -77,6 +76,7 @@ import { formatYear } from '@/filters/formatYear';
 import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import SimpleAlert from '@/components/SimpleAlert.vue';
+import Poster from '@/components/Poster.vue';
 import Movie from '@/models/movie';
 import Genre from '@/models/genre';
 import config from '@/config.json';
@@ -87,6 +87,7 @@ import App from '@/App.vue';
 		Rating,
 		GenreSet,
 		SimpleAlert,
+		Poster,
 	},
 })
 export default class MovieDetail extends Vue {
@@ -98,6 +99,7 @@ export default class MovieDetail extends Vue {
 	private rating = 0;
 	private alert = false;
 	private alertTitle = 'Confirm Removal';
+	private poster = false;
 
 	private get alertMessage(): string {
 		return 'Are you sure you want "' + AppModule.selectedMovie.title + '" out of your life forever?';
@@ -141,6 +143,10 @@ export default class MovieDetail extends Vue {
 
 	private toggleWatched(): void {
 		this.watched = !this.watched;
+	}
+
+	private showPoster(): void {
+		this.poster = true;
 	}
 
 	private reset() {
