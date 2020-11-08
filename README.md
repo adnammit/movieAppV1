@@ -116,8 +116,11 @@ A list of all movies in the collection. Filterable by:
 * CSS overhaul: consolidate css for movies and search
 
 ### Feature List:
+* implement Surprise!
 * click poster to see full-size (opens as link in new window now -- change to just make it a big modal)
 * add filter by genre
+* add comments
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
+    - or try [Watch Here](https://rapidapi.com/devroldy/api/watch-here/details) -- get all the streaming things at once!
 * add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
 * wow yr build takes one million years... see if you can delete some unused packages or something

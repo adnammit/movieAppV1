@@ -5,7 +5,7 @@ import IMediaService from '@/services/IMediaService';
 import Movie from '@/models/movie';
 
 const requestMgr = axios.create({
-	baseURL: process.env.VUE_APP_MEDIA_SERVICE_URL,
+	baseURL: `${process.env.VUE_APP_MEDIA_SERVICE_URL}api/v1/`,
 });
 
 class MediaService implements IMediaService {
