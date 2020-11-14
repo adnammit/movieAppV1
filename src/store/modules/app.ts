@@ -78,7 +78,7 @@ class App extends VuexModule implements AppState {
 			})
 			.catch((e: any) => {
 				/* eslint-disable no-console */
-				console.log(e);
+				console.error(e);
 				this.context.commit(AppMutation.SET_IS_ERRORED, true);
 			})
 			.finally(() => {

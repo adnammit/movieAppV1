@@ -17,9 +17,15 @@ class MediaService implements IMediaService {
 	}
 
 	public async getUserMovies(userid: number): Promise<UserMovie[]> {
-		return requestMgr.get('user/' + userid + '/movies').then(res => {
-			return res.data as UserMovie[];
-		});
+		return requestMgr
+			.get('user/' + userid + '/movies')
+			.then(res => {
+				return res.data as UserMovie[];
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
 	}
 
 	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
@@ -29,7 +35,15 @@ class MediaService implements IMediaService {
 			watched: movie.watched,
 			favorite: movie.favorite,
 		};
-		return requestMgr.put('user/' + userid + '/movies', request);
+		return requestMgr
+			.put('user/' + userid + '/movies', request)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
 	}
 
 	public async addUserMovie(userid: number, movie: Movie): Promise<boolean> {
@@ -40,11 +54,46 @@ class MediaService implements IMediaService {
 			watched: movie.watched,
 			favorite: movie.favorite,
 		};
-		return requestMgr.post('user/' + userid + '/movies', request);
+		return requestMgr
+			.post('user/' + userid + '/movies', request)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
 	}
 
 	public async deleteUserMovie(userid: number, movie: Movie): Promise<boolean> {
-		return requestMgr.delete('user/' + userid + '/movies/' + movie.id);
+		return requestMgr
+			.delete('user/' + userid + '/movies/' + movie.id)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
+	private logError(error: any) {
+		if (error.response) {
+			// The request was made and the server responded with a status code
+			// that falls out of the range of 2xx
+			console.log(error.response.data);
+			console.log(error.response.status);
+			console.log(error.response.headers);
+		} else if (error.request) {
+			// The request was made but no response was received
+			// `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+			// http.ClientRequest in node.js
+			console.log(error.request);
+		} else {
+			// Something happened in setting up the request that triggered an Error
+			console.log('Error', error.message);
+		}
+		console.log(error.config);
 	}
 }
 

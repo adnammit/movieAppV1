@@ -73,10 +73,10 @@ A list of all movies in the collection. Filterable by:
 * genre
 
 ### Movie entity
-* movie data -- pulled from google api?
+* movie data -- pulled from MovieDB api
 * watched flag
 * rating
-* category -- user assigned or pulled from data?
+* genre
 
 ### User operations
 * search for movies using api database
@@ -99,6 +99,7 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
+* better error handling in services/api
 * support tv in collection
 * search:
     - add actions: details, add to collection
@@ -120,6 +121,6 @@ A list of all movies in the collection. Filterable by:
 * add filter by genre
 * add comments
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
-    - or try [Watch Here](https://rapidapi.com/devroldy/api/watch-here/details) -- get all the streaming things at once!
+    - or try [Watch Here](https://rapidapi.com/devroldy/api/watch-here/details) -- get all the streaming things at once! -- would have to pay for this one
 * add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
 * wow yr build takes one million years... see if you can delete some unused packages or something
