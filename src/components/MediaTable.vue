@@ -1,6 +1,6 @@
 <template>
 	<div class="text-center movie-table">
-		<v-data-table :headers="headers" :items="movies" :sort-by="['title']" hide-default-footer>
+		<v-data-table :headers="headers" :items="items" item-key="movieDbId" :sort-by="['title']" hide-default-footer>
 			<!-- Watched -->
 			<template v-slot:[`item.watched`]="{ item }">
 				<td @click="toggleWatched(item)">
@@ -26,8 +26,8 @@
 			</template>
 
 			<!-- Year -->
-			<template v-slot:[`item.releaseDate`]="{ item }">
-				{{ item.releaseDate | formatYear }}
+			<template v-slot:[`item.released`]="{ item }">
+				{{ item.released | formatYear }}
 			</template>
 
 			<!-- Genres -->
@@ -48,7 +48,7 @@
 				</td>
 			</template>
 		</v-data-table>
-		<MovieDetail v-model="showDetail" />
+		<MediaDetail v-model="showDetail" />
 	</div>
 </template>
 
@@ -58,53 +58,53 @@ import { AppModule } from '@/store/modules/app';
 import { FilterModule } from '@/store/modules/filter';
 import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
-import MovieDetail from '@/components/MovieDetail.vue';
-import Movie from '@/models/movie';
+import MediaDetail from '@/components/MediaDetail.vue';
+import Media from '@/models/media';
 import config from '@/config.json';
 
 @Component({
 	components: {
 		Rating,
 		GenreSet,
-		MovieDetail,
+		MediaDetail,
 	},
 })
-export default class Movies extends Vue {
+export default class MediaTable extends Vue {
 	private showDetail = false;
 
 	private headers = [
 		{ text: 'Watched', sortable: true, value: 'watched' },
-		{ text: 'Movie', sortable: true, value: 'title' },
-		{ text: 'Year', sortable: true, value: 'releaseDate' },
+		{ text: 'Title', sortable: true, value: 'title' },
+		{ text: 'Year', sortable: true, value: 'released' },
 		{ text: 'Genre', sortable: false, value: 'genres', align: 'center' },
 		{ text: 'Rating', sortable: true, value: 'rating' },
 		{ text: 'Favorite', sortable: true, value: 'favorite' },
 	];
 
-	private get movies(): Movie[] {
-		return AppModule.userMovies;
+	private get items(): Media[] {
+		return AppModule.userItems;
 	}
 
-	private getPosterPath(movie: Movie): string {
-		return `${config.movieDbBasePosterPath}${movie.poster}`;
+	private getPosterPath(item: Media): string {
+		return `${config.movieDbBasePosterPath}${item.poster}`;
 	}
 
-	private toggleFavorite(movie: Movie): void {
-		movie.favorite = !movie.favorite;
-		AppModule.updateUserMovie(movie);
+	private toggleFavorite(item: Media): void {
+		item.favorite = !item.favorite;
+		AppModule.updateUserItem(item);
 	}
 
-	private toggleWatched(movie: Movie): void {
-		movie.watched = !movie.watched;
-		AppModule.updateUserMovie(movie);
+	private toggleWatched(item: Media): void {
+		item.watched = !item.watched;
+		AppModule.updateUserItem(item);
 	}
 
-	private updateRating(movie: Movie): void {
-		AppModule.updateUserMovie(movie);
+	private updateRating(item: Media): void {
+		AppModule.updateUserItem(item);
 	}
 
-	private openDetail(movie: Movie) {
-		AppModule.setSelectedMovie(movie);
+	private openDetail(item: Media) {
+		AppModule.setSelectedItem(item);
 		this.showDetail = true;
 	}
 

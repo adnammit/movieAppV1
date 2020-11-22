@@ -1,7 +1,7 @@
 import { Module, VuexModule, Mutation, Action, getModule } from 'vuex-module-decorators';
 import store from '@/store';
 import { AppModule } from '@/store/modules/app';
-import MovieApi from '@/services/MovieApi';
+import MovieDbApi from '@/services/MovieDbApi';
 import SearchResult from '@/models/searchResult';
 
 export interface FilterState {
@@ -61,7 +61,7 @@ class Filter extends VuexModule implements FilterState {
 	@Action
 	public async Search(search: string) {
 		AppModule.setIsLoading(true);
-		MovieApi.search(search)
+		MovieDbApi.search(search)
 			.then((results: any) => {
 				if (results.Error != null) {
 					/* eslint-disable no-console */

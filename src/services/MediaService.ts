@@ -1,8 +1,9 @@
 import axios from 'axios';
 import User from '@/models/user';
-import UserMovie from '@/models/dto/userMovie';
-import IMediaService from '@/services/IMediaService';
+import UserMedia from '@/models/dto/userMedia';
 import Movie from '@/models/movie';
+import Tv from '@/models/tv';
+import IMediaService from '@/services/IMediaService';
 
 const requestMgr = axios.create({
 	baseURL: `${process.env.VUE_APP_MEDIA_SERVICE_URL}api/v1/`,
@@ -16,29 +17,11 @@ class MediaService implements IMediaService {
 		});
 	}
 
-	public async getUserMovies(userid: number): Promise<UserMovie[]> {
+	public async getUserMovies(userid: number): Promise<UserMedia[]> {
 		return requestMgr
 			.get('user/' + userid + '/movies')
 			.then(res => {
-				return res.data as UserMovie[];
-			})
-			.catch(error => {
-				this.logError(error);
-				throw error;
-			});
-	}
-
-	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
-		const request: any = {
-			id: movie.id,
-			rating: movie.rating,
-			watched: movie.watched,
-			favorite: movie.favorite,
-		};
-		return requestMgr
-			.put('user/' + userid + '/movies', request)
-			.then(res => {
-				return res.status === 200;
+				return res.data as UserMedia[];
 			})
 			.catch(error => {
 				this.logError(error);
@@ -65,9 +48,88 @@ class MediaService implements IMediaService {
 			});
 	}
 
+	public async updateUserMovie(userid: number, movie: Movie): Promise<boolean> {
+		const request: any = {
+			id: movie.id,
+			rating: movie.rating,
+			watched: movie.watched,
+			favorite: movie.favorite,
+		};
+		return requestMgr
+			.put('user/' + userid + '/movies', request)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
 	public async deleteUserMovie(userid: number, movie: Movie): Promise<boolean> {
 		return requestMgr
 			.delete('user/' + userid + '/movies/' + movie.id)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
+	public async getUserTv(userid: number): Promise<UserMedia[]> {
+		return requestMgr
+			.get('user/' + userid + '/tv')
+			.then(res => {
+				return res.data as UserMedia[];
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
+	public async addUserTv(userid: number, tv: Tv): Promise<boolean> {
+		const request: any = {
+			movieDbId: tv.movieDbId,
+			imdbId: tv.imdbId,
+			rating: tv.rating,
+			watched: tv.watched,
+			favorite: tv.favorite,
+		};
+		return requestMgr
+			.post('user/' + userid + '/tv', request)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
+	public async updateUserTv(userid: number, tv: Tv): Promise<boolean> {
+		const request: any = {
+			id: tv.id,
+			rating: tv.rating,
+			watched: tv.watched,
+			favorite: tv.favorite,
+		};
+		return requestMgr
+			.put('user/' + userid + '/tv', request)
+			.then(res => {
+				return res.status === 200;
+			})
+			.catch(error => {
+				this.logError(error);
+				throw error;
+			});
+	}
+
+	public async deleteUserTv(userid: number, tv: Tv): Promise<boolean> {
+		return requestMgr
+			.delete('user/' + userid + '/tv/' + tv.id)
 			.then(res => {
 				return res.status === 200;
 			})

@@ -1,5 +1,5 @@
-export default interface UserMovie {
-	movieid: number;
+export default interface UserMedia {
+	id: number;
 	userid: number;
 	moviedbid: number;
 	imdbid: string;

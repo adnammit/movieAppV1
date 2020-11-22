@@ -99,6 +99,11 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
+**deleting tv doesn't work**
+* adding tv
+    - filter by movie/tv
+    - add indication of movie vs tv
+    - add more to genre set
 * better error handling in services/api
 * support tv in collection
 * search:
@@ -118,6 +123,7 @@ A list of all movies in the collection. Filterable by:
 
 ### Feature List:
 * implement Surprise!
+    - spinning pizza!
 * add filter by genre
 * add comments
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix

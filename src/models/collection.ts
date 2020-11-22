@@ -1,12 +1,12 @@
-import Movie from '@/models/movie';
+import Media from '@/models/media';
 
 export default class Collection {
 	public userid = 0; // replace with User?
-	public email = '';
-	public movies: Movie[] = [];
+	// public email = '';
+	public items: Media[] = [];
 
-	constructor(userid?: number, movies?: Movie[]) {
+	constructor(userid?: number, items?: Media[]) {
 		this.userid = userid ? userid : 0;
-		this.movies = movies ? movies : [];
+		this.items = items ? items : [];
 	}
 }

@@ -24,7 +24,7 @@
 									<td>{{ item.title }}</td>
 									<td>
 										<div class="my-2">
-											<v-btn small color="primary" @click="addMovie(item)">Save</v-btn>
+											<v-btn small color="primary" @click="addItem(item)">Save</v-btn>
 										</div>
 									</td>
 								</tr>
@@ -68,8 +68,8 @@ export default class SearchDialog extends Vue {
 		return FilterModule.results;
 	}
 
-	private addMovie(item: SearchResult) {
-		AppModule.addSearchAsMovie(item);
+	private addItem(item: SearchResult) {
+		AppModule.addSearch(item);
 	}
 
 	@Watch('value')

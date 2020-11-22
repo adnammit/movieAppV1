@@ -1,7 +1,7 @@
 <template>
 	<v-row justify="center">
 		<v-dialog v-model="showDialog" scrollable max-width="40vw">
-			<v-card class="movie-details">
+			<v-card class="item-details">
 				<v-card-title>{{ title }}</v-card-title>
 				<v-divider></v-divider>
 				<v-card-text>
@@ -28,8 +28,8 @@
 							<v-spacer></v-spacer>
 						</v-row>
 						<v-row class="details--body">
-							<v-col cols="6">
-								<v-img :src="posterPath" class="poster" contain @click="showPoster">
+							<v-col cols="6" v-if="showPoster">
+								<v-img :src="posterPath" class="poster" contain @click="showPosterDetail">
 									<template v-slot:placeholder>
 										<v-row class="fill-height ma-0" align="center" justify="center">
 											<v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -77,7 +77,6 @@ import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import SimpleAlert from '@/components/SimpleAlert.vue';
 import Poster from '@/components/Poster.vue';
-import Movie from '@/models/movie';
 import Genre from '@/models/genre';
 import config from '@/config.json';
 import App from '@/App.vue';
@@ -90,7 +89,7 @@ import App from '@/App.vue';
 		Poster,
 	},
 })
-export default class MovieDetail extends Vue {
+export default class MediaDetail extends Vue {
 	@Prop(Boolean) readonly value: boolean = false;
 	@Prop(Function) readonly onSave!: () => void;
 
@@ -102,31 +101,35 @@ export default class MovieDetail extends Vue {
 	private poster = false;
 
 	private get alertMessage(): string {
-		return 'Are you sure you want "' + AppModule.selectedMovie.title + '" out of your life forever?';
+		return 'Are you sure you want "' + AppModule.selectedItem.title + '" out of your life forever?';
 	}
 
 	private get title(): string {
-		return AppModule.selectedMovie.title;
+		return AppModule.selectedItem.title;
 	}
 
 	private get year(): string {
-		return formatYear(AppModule.selectedMovie.releaseDate);
+		return formatYear(AppModule.selectedItem.released);
 	}
 
 	private get popularRating(): string {
-		return 'IMDB Rating ' + String(AppModule.selectedMovie.popularRating);
+		return 'IMDB Rating ' + String(AppModule.selectedItem.popularRating);
 	}
 
 	private get genres(): Genre[] {
-		return AppModule.selectedMovie.genres;
+		return AppModule.selectedItem.genres;
 	}
 
 	private get description(): string {
-		return AppModule.selectedMovie.summary;
+		return AppModule.selectedItem.summary;
+	}
+
+	private get showPoster(): boolean {
+		return AppModule.selectedItem.poster != null && AppModule.selectedItem.poster != '';
 	}
 
 	private get posterPath(): string {
-		return `${config.movieDbBasePosterPath}${AppModule.selectedMovie.poster}`;
+		return `${config.movieDbBasePosterPath}${AppModule.selectedItem.poster}`;
 	}
 
 	private get showDialog(): boolean {
@@ -145,14 +148,14 @@ export default class MovieDetail extends Vue {
 		this.watched = !this.watched;
 	}
 
-	private showPoster(): void {
+	private showPosterDetail(): void {
 		this.poster = true;
 	}
 
 	private reset() {
-		this.favorite = AppModule.selectedMovie.favorite;
-		this.watched = AppModule.selectedMovie.watched;
-		this.rating = AppModule.selectedMovie.rating;
+		this.favorite = AppModule.selectedItem.favorite;
+		this.watched = AppModule.selectedItem.watched;
+		this.rating = AppModule.selectedItem.rating;
 	}
 
 	private closeDialog() {
@@ -160,11 +163,11 @@ export default class MovieDetail extends Vue {
 	}
 
 	private async save() {
-		const movie = Object.assign(AppModule.selectedMovie);
-		movie.favorite = this.favorite;
-		movie.watched = this.watched;
-		movie.rating = this.rating;
-		await AppModule.updateUserMovie(movie);
+		const item = Object.assign(AppModule.selectedItem);
+		item.favorite = this.favorite;
+		item.watched = this.watched;
+		item.rating = this.rating;
+		await AppModule.updateUserItem(item);
 		await AppModule.getUserCollection();
 		this.closeDialog();
 	}
@@ -174,7 +177,7 @@ export default class MovieDetail extends Vue {
 	}
 
 	private remove() {
-		AppModule.removeFromCollection(AppModule.selectedMovie);
+		AppModule.removeFromCollection(AppModule.selectedItem);
 		this.closeDialog();
 	}
 
@@ -191,7 +194,7 @@ export default class MovieDetail extends Vue {
 @import '@/style/colors';
 @import '@/style/main';
 
-.movie-details::v-deep {
+.item-details::v-deep {
 	.v-card__subtitle {
 		letter-spacing: 1px;
 	}

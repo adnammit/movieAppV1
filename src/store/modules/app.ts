@@ -3,9 +3,10 @@ import store from '@/store';
 import MediaProvider from '@/services/MediaProvider';
 import oktaUser from '@/models/oktaUser';
 import Collection from '@/models/collection';
+import Media from '@/models/media';
 import Movie from '@/models/movie';
-import { FilterModule } from '@/store/modules/filter';
 import SearchResult from '@/models/searchResult';
+import { FilterModule } from '@/store/modules/filter';
 
 export interface AppState {
 	isNoData: boolean;
@@ -21,7 +22,7 @@ enum AppMutation {
 	SET_IS_ERRORED = 'SET_IS_ERRORED',
 	SET_USER = 'SET_USER',
 	SET_COLLECTION = 'SET_COLLECTION',
-	SET_SELECTED_MOVIE = 'SET_SELECTED_MOVIE',
+	SET_SELECTED_ITEM = 'SET_SELECTED_ITEM',
 }
 
 @Module({ dynamic: true, namespaced: true, store, name: 'AppState' })
@@ -31,11 +32,11 @@ class App extends VuexModule implements AppState {
 	public isErrored = false;
 	public currentUser = new oktaUser();
 	public collection = new Collection();
-	public selectedMovie = new Movie();
+	public selectedItem: Media = new Movie();
 
-	public get userMovies() {
-		const movies = this.collection ? this.collection?.movies : [];
-		return movies.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true));
+	public get userItems() {
+		const items = this.collection ? this.collection?.items : [];
+		return items.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true));
 	}
 
 	public get noData() {
@@ -60,8 +61,8 @@ class App extends VuexModule implements AppState {
 	}
 
 	@Action
-	public setSelectedMovie(val: Movie) {
-		this.context.commit(AppMutation.SET_SELECTED_MOVIE, val);
+	public setSelectedItem(val: Media) {
+		this.context.commit(AppMutation.SET_SELECTED_ITEM, val);
 	}
 
 	@Action
@@ -72,7 +73,7 @@ class App extends VuexModule implements AppState {
 		MediaProvider.getUserCollection(1)
 			.then((res: Collection) => {
 				this.context.commit(AppMutation.SET_COLLECTION, res);
-				if (res.movies.length == 0) {
+				if (res.items.length == 0) {
 					this.context.commit(AppMutation.SET_NO_DATA, true);
 				}
 			})
@@ -87,12 +88,12 @@ class App extends VuexModule implements AppState {
 	}
 
 	@Action
-	public async updateUserMovie(movie: Movie) {
+	public async updateUserItem(item: Media) {
 		// let user = this.user
-		MediaProvider.updateUserMovie(1, movie)
+		MediaProvider.updateUserItem(1, item)
 			.then((res: boolean) => {
 				if (!res) {
-					throw Error('Error updating movie');
+					throw Error('Error updating item');
 				}
 			})
 			.catch((e: any) => {
@@ -103,14 +104,14 @@ class App extends VuexModule implements AppState {
 	}
 
 	@Action
-	public async addSearchAsMovie(item: SearchResult) {
+	public async addSearch(item: SearchResult) {
 		// let user = this.user
-		MediaProvider.addSearchAsMovie(1, item)
+		MediaProvider.addSearch(1, item)
 			.then((res: boolean) => {
 				if (res) {
 					this.getUserCollection();
 				} else {
-					throw Error('Error saving search as user movie ');
+					throw Error('Error saving searched item to user collection ');
 				}
 			})
 			.catch((e: any) => {
@@ -121,14 +122,14 @@ class App extends VuexModule implements AppState {
 	}
 
 	@Action
-	public async removeFromCollection(item: Movie) {
+	public async removeFromCollection(item: Media) {
 		// let user = this.user
 		MediaProvider.removeFromCollection(1, item)
 			.then((res: boolean) => {
 				if (res) {
 					this.getUserCollection();
 				} else {
-					throw Error('Error removing movie from collection');
+					throw Error('Error removing item from user collection');
 				}
 			})
 			.catch((e: any) => {
@@ -164,8 +165,8 @@ class App extends VuexModule implements AppState {
 	}
 
 	@Mutation
-	SET_SELECTED_MOVIE(val: Movie) {
-		this.selectedMovie = val;
+	SET_SELECTED_ITEM(val: Media) {
+		this.selectedItem = val;
 	}
 }
 

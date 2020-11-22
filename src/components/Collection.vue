@@ -2,7 +2,7 @@
 	<div class="container-fluid mt-4">
 		<FilterBar />
 		<NoData v-if="noData" />
-		<Movies v-else />
+		<MediaTable v-else />
 		<Search v-model="showSearch" />
 	</div>
 </template>
@@ -13,18 +13,18 @@ import { FilterModule } from '@/store/modules/filter';
 import { AppModule } from '@/store/modules/app';
 import FilterBar from '@/components/FilterBar.vue';
 import NoData from '@/components/NoData.vue';
-import Movies from '@/components/Movies.vue';
+import MediaTable from '@/components/MediaTable.vue';
 import Search from '@/components/Search.vue';
 
 @Component({
 	components: {
 		FilterBar,
 		NoData,
-		Movies,
+		MediaTable,
 		Search,
 	},
 })
-export default class MoviesView extends Vue {
+export default class Collection extends Vue {
 	private get noData() {
 		return AppModule.noData;
 	}
