@@ -6,7 +6,7 @@
 			</template>
 			<span>Action</span>
 		</v-tooltip>
-		<v-tooltip top open-delay="300" v-if="getGenreMatch('Adventure')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch(['Adventure', 'Action & Adventure'])">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="hiking" size="lg" />
 			</template>
@@ -42,7 +42,7 @@
 			</template>
 			<span>Drama</span>
 		</v-tooltip>
-		<v-tooltip top open-delay="300" v-if="getGenreMatch('Family')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch(['Family', 'Kids'])">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="baby" size="lg" />
 			</template>
@@ -78,17 +78,41 @@
 			</template>
 			<span>Mystery</span>
 		</v-tooltip>
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('News')">
+			<template v-slot:activator="{ on }">
+				<font-awesome-icon v-on="on" icon="newspaper" size="lg" />
+			</template>
+			<span>News</span>
+		</v-tooltip>
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Reality')">
+			<template v-slot:activator="{ on }">
+				<font-awesome-icon v-on="on" icon="camera" size="lg" />
+			</template>
+			<span>Reality</span>
+		</v-tooltip>
 		<v-tooltip top open-delay="300" v-if="getGenreMatch('Romance')">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="heart" size="lg" />
 			</template>
 			<span>Romance</span>
 		</v-tooltip>
-		<v-tooltip top open-delay="300" v-if="getGenreMatch('Science Fiction')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch(['Science Fiction', 'Sci-Fi & Fantasy'])">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="robot" size="lg" />
 			</template>
 			<span>Sci-Fi</span>
+		</v-tooltip>
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Soap')">
+			<template v-slot:activator="{ on }">
+				<font-awesome-icon v-on="on" icon="soap" size="lg" />
+			</template>
+			<span>Soap</span>
+		</v-tooltip>
+		<v-tooltip top open-delay="300" v-if="getGenreMatch('Talk')">
+			<template v-slot:activator="{ on }">
+				<font-awesome-icon v-on="on" icon="microphone-alt" size="lg" />
+			</template>
+			<span>Talk</span>
 		</v-tooltip>
 		<v-tooltip top open-delay="300" v-if="getGenreMatch('TV Movie')">
 			<template v-slot:activator="{ on }">
@@ -102,7 +126,7 @@
 			</template>
 			<span>Thriller</span>
 		</v-tooltip>
-		<v-tooltip top open-delay="300" v-if="getGenreMatch('War')">
+		<v-tooltip top open-delay="300" v-if="getGenreMatch(['War', 'War & Politics'])">
 			<template v-slot:activator="{ on }">
 				<font-awesome-icon v-on="on" icon="fighter-jet" size="lg" />
 			</template>
@@ -125,9 +149,10 @@ import Genre from '@/models/genre';
 export default class GenreSet extends Vue {
 	@Prop() readonly genres!: Genre[];
 
-	private getGenreMatch(genre: string) {
+	private getGenreMatch(val: string | string[]) {
+		const genre = typeof val == 'string' ? [val] : val;
 		if (this.genres) {
-			return this.genres.some(g => g.name == genre);
+			return genre.some(g => this.genres.some(gg => gg.name == g));
 		}
 		return false;
 	}
