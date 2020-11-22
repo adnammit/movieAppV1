@@ -7,6 +7,8 @@
 				<v-btn @click="resetFilter()" rounded :text="!isUnfiltered">All</v-btn>
 				<v-btn @click="toggleFavorites()" rounded :text="!isFilteredByFavorite">Favorites</v-btn>
 				<v-btn @click="toggleTodo()" rounded :text="!isFilteredByTodo">To Do</v-btn>
+				<v-btn @click="toggleMovies()" rounded :text="!isFilteredByMovies">Movies</v-btn>
+				<v-btn @click="toggleTv()" rounded :text="!isFilteredByTv">Tv</v-btn>
 				<v-btn @click="surprise()" rounded text><v-icon>mdi-pizza</v-icon></v-btn>
 				<v-spacer></v-spacer>
 				<v-toolbar-items>
@@ -55,6 +57,14 @@ export default class FilterBar extends Vue {
 		return FilterModule.filterByTodo;
 	}
 
+	private get isFilteredByMovies(): boolean {
+		return FilterModule.filterToMovies;
+	}
+
+	private get isFilteredByTv(): boolean {
+		return FilterModule.filterToTv;
+	}
+
 	private get isUnfiltered(): boolean {
 		return !FilterModule.filterByTodo && !FilterModule.filterByFavorite;
 	}
@@ -69,6 +79,14 @@ export default class FilterBar extends Vue {
 
 	private toggleTodo(): void {
 		FilterModule.toggleTodo();
+	}
+
+	private toggleMovies(): void {
+		FilterModule.toggleMovies();
+	}
+
+	private toggleTv(): void {
+		FilterModule.toggleTv();
 	}
 
 	private resetFilter(): void {

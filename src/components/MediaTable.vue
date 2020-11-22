@@ -9,6 +9,14 @@
 				</td>
 			</template>
 
+			<!-- Watched -->
+			<template v-slot:[`item.controls`]="{ item }">
+				<td>
+					<v-icon v-if="isMovie(item)">mdi-filmstrip</v-icon>
+					<v-icon v-if="isTv(item)">mdi-television</v-icon>
+				</td>
+			</template>
+
 			<!-- Title -->
 			<template v-slot:[`item.title`]="{ item }">
 				<v-tooltip left open-delay="500">
@@ -60,6 +68,8 @@ import Rating from '@/components/Rating.vue';
 import GenreSet from '@/components/GenreSet.vue';
 import MediaDetail from '@/components/MediaDetail.vue';
 import Media from '@/models/media';
+import Movie from '@/models/movie';
+import Tv from '@/models/tv';
 import config from '@/config.json';
 
 @Component({
@@ -74,6 +84,7 @@ export default class MediaTable extends Vue {
 
 	private headers = [
 		{ text: 'Watched', sortable: true, value: 'watched' },
+		{ text: 'Type', sortable: true, value: 'controls' },
 		{ text: 'Title', sortable: true, value: 'title' },
 		{ text: 'Year', sortable: true, value: 'released' },
 		{ text: 'Genre', sortable: false, value: 'genres', align: 'center' },
@@ -83,6 +94,14 @@ export default class MediaTable extends Vue {
 
 	private get items(): Media[] {
 		return AppModule.userItems;
+	}
+
+	private isMovie(item: Media): boolean {
+		return item instanceof Movie;
+	}
+
+	private isTv(item: Media): boolean {
+		return item instanceof Tv;
 	}
 
 	private getPosterPath(item: Media): string {

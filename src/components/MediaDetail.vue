@@ -3,6 +3,7 @@
 		<v-dialog v-model="showDialog" scrollable max-width="40vw">
 			<v-card class="item-details">
 				<v-card-title>{{ title }}</v-card-title>
+				<v-card-subtitle>{{ subtitle }}</v-card-subtitle>
 				<v-divider></v-divider>
 				<v-card-text>
 					<v-container>
@@ -78,6 +79,8 @@ import GenreSet from '@/components/GenreSet.vue';
 import SimpleAlert from '@/components/SimpleAlert.vue';
 import Poster from '@/components/Poster.vue';
 import Genre from '@/models/genre';
+import Movie from '@/models/movie';
+import Tv from '@/models/tv';
 import config from '@/config.json';
 import App from '@/App.vue';
 
@@ -106,6 +109,10 @@ export default class MediaDetail extends Vue {
 
 	private get title(): string {
 		return AppModule.selectedItem.title;
+	}
+
+	private get subtitle(): string {
+		return AppModule.selectedItem instanceof Movie ? 'Movie' : AppModule.selectedItem instanceof Tv ? 'Television Show' : '';
 	}
 
 	private get year(): string {

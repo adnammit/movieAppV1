@@ -99,13 +99,9 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
-**deleting tv doesn't work**
-* adding tv
-    - filter by movie/tv
-    - add indication of movie vs tv
-    - add more to genre set
-* better error handling in services/api
-* support tv in collection
+* maybe template MediaTable rows better (template rows not columns so you can add the type w/out being weird)
+* OR add a Type prop to Media object -- i kinda like this better
+    - go through and rejigger everything that evaluates type (instanceof / typeof)
 * search:
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option

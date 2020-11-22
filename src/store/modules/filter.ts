@@ -7,6 +7,8 @@ import SearchResult from '@/models/searchResult';
 export interface FilterState {
 	filterByFavorite: boolean;
 	filterByTodo: boolean;
+	filterToMovies: boolean;
+	filterToTv: boolean;
 	showSearch: boolean;
 	results: SearchResult[];
 }
@@ -14,6 +16,8 @@ export interface FilterState {
 enum FilterMutation {
 	SET_FILTER_FAVORITES = 'SET_FILTER_FAVORITES',
 	SET_FILTER_TODO = 'SET_FILTER_TODO',
+	SET_SHOW_MOVIES = 'SET_SHOW_MOVIES',
+	SET_SHOW_TV = 'SET_SHOW_TV',
 	SET_SHOW_SEARCH = 'SET_SHOW_SEARCH',
 	SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS',
 }
@@ -22,16 +26,10 @@ enum FilterMutation {
 class Filter extends VuexModule implements FilterState {
 	public filterByFavorite = false;
 	public filterByTodo = false;
+	public filterToMovies = false;
+	public filterToTv = false;
 	public showSearch = false;
 	public results: SearchResult[] = [];
-
-	// public get SearchResults(): SearchResult[] {
-	// 	return this.results;
-	// }
-
-	// public set SearchResults(results: SearchResult[]) {
-	// 	this.results = results;
-	// }
 
 	@Action
 	async toggleFavorites() {
@@ -45,6 +43,20 @@ class Filter extends VuexModule implements FilterState {
 		const val = !this.filterByTodo;
 		this.context.commit(FilterMutation.SET_FILTER_TODO, val);
 		if (val && this.filterByFavorite) this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
+	}
+
+	@Action
+	async toggleMovies() {
+		const val = !this.filterToMovies;
+		this.context.commit(FilterMutation.SET_SHOW_MOVIES, val);
+		if (val && this.filterToTv) this.context.commit(FilterMutation.SET_SHOW_TV, false);
+	}
+
+	@Action
+	async toggleTv() {
+		const val = !this.filterToTv;
+		this.context.commit(FilterMutation.SET_SHOW_TV, val);
+		if (val && this.filterToMovies) this.context.commit(FilterMutation.SET_SHOW_MOVIES, false);
 	}
 
 	@Action
@@ -94,6 +106,16 @@ class Filter extends VuexModule implements FilterState {
 	@Mutation
 	SET_FILTER_TODO(val: boolean) {
 		this.filterByTodo = val;
+	}
+
+	@Mutation
+	SET_SHOW_MOVIES(val: boolean) {
+		this.filterToMovies = val;
+	}
+
+	@Mutation
+	SET_SHOW_TV(val: boolean) {
+		this.filterToTv = val;
 	}
 
 	@Mutation

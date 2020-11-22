@@ -5,6 +5,7 @@ import oktaUser from '@/models/oktaUser';
 import Collection from '@/models/collection';
 import Media from '@/models/media';
 import Movie from '@/models/movie';
+import Tv from '@/models/tv';
 import SearchResult from '@/models/searchResult';
 import { FilterModule } from '@/store/modules/filter';
 
@@ -36,7 +37,9 @@ class App extends VuexModule implements AppState {
 
 	public get userItems() {
 		const items = this.collection ? this.collection?.items : [];
-		return items.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true));
+		return items
+			.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true))
+			.filter(i => (FilterModule.filterToMovies ? i instanceof Movie : FilterModule.filterToTv ? i instanceof Tv : true));
 	}
 
 	public get noData() {
