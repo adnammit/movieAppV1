@@ -1,15 +1,7 @@
 <template>
 	<div class="text-center movie-table">
 		<v-data-table :headers="headers" :items="items" item-key="movieDbId" :sort-by="['title']" hide-default-footer>
-			<!-- Watched -->
-			<template v-slot:[`item.watched`]="{ item }">
-				<td @click="toggleWatched(item)">
-					<v-icon v-if="item.watched" class="complete">mdi-check-bold</v-icon>
-					<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
-				</td>
-			</template>
-
-			<!-- Watched -->
+			<!-- Type -->
 			<template v-slot:[`item.controls`]="{ item }">
 				<td>
 					<v-icon v-if="isMovie(item)">mdi-filmstrip</v-icon>
@@ -55,6 +47,22 @@
 					<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
 				</td>
 			</template>
+
+			<!-- Watched -->
+			<template v-slot:[`item.watched`]="{ item }">
+				<td @click="toggleWatched(item)">
+					<v-icon v-if="item.watched" class="complete">mdi-check-bold</v-icon>
+					<v-icon v-else class="icon--deselected">mdi-panorama-fisheye</v-icon>
+				</td>
+			</template>
+
+			<!-- Queued -->
+			<template v-slot:[`item.queued`]="{ item }">
+				<td @click="toggleQueued(item)">
+					<v-icon v-if="item.queued" class="queued">mdi-fire</v-icon>
+					<v-icon v-else class="icon--deselected">mdi-fire</v-icon>
+				</td>
+			</template>
 		</v-data-table>
 		<MediaDetail v-model="showDetail" />
 	</div>
@@ -83,13 +91,14 @@ export default class MediaTable extends Vue {
 	private showDetail = false;
 
 	private headers = [
-		{ text: 'Watched', sortable: true, value: 'watched' },
 		{ text: 'Type', sortable: true, value: 'controls' },
 		{ text: 'Title', sortable: true, value: 'title' },
 		{ text: 'Year', sortable: true, value: 'released' },
 		{ text: 'Genre', sortable: false, value: 'genres', align: 'center' },
 		{ text: 'Rating', sortable: true, value: 'rating' },
 		{ text: 'Favorite', sortable: true, value: 'favorite' },
+		{ text: 'Watched', sortable: true, value: 'watched' },
+		{ text: 'Up Next', sortable: true, value: 'queued' },
 	];
 
 	private get items(): Media[] {
@@ -106,6 +115,11 @@ export default class MediaTable extends Vue {
 
 	private getPosterPath(item: Media): string {
 		return `${config.movieDbBasePosterPath}${item.poster}`;
+	}
+
+	private toggleQueued(item: Media): void {
+		item.queued = !item.queued;
+		AppModule.updateUserItem(item);
 	}
 
 	private toggleFavorite(item: Media): void {

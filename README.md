@@ -118,6 +118,12 @@ A list of all movies in the collection. Filterable by:
 * CSS overhaul: consolidate css for movies and search
 
 ### Feature List:
+* add some kind of hot queue feature (stuff you want to watch soon)
+    - change the favorite property to queue?
+    - cos that might be redundant with 5 starts...
+* add csv export option
+* custom column sets
+* add tags/categories/lists
 * implement Surprise!
     - spinning pizza!
 * add filter by genre

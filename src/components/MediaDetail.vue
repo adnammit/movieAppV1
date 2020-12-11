@@ -21,6 +21,13 @@
 							</v-col>
 							<v-spacer></v-spacer>
 							<v-col cols="auto">
+								<div @click="toggleQueued()">
+									<v-icon v-if="queued" class="queued">mdi-fire</v-icon>
+									<v-icon v-else class="icon--deselected">mdi-fire</v-icon>
+								</div>
+							</v-col>
+							<v-spacer></v-spacer>
+							<v-col cols="auto">
 								<div @click="toggleFavorite()">
 									<v-icon v-if="favorite" class="favorite">mdi-star-circle</v-icon>
 									<v-icon v-else class="icon--deselected">mdi-star-circle-outline</v-icon>
@@ -96,6 +103,7 @@ export default class MediaDetail extends Vue {
 	@Prop(Boolean) readonly value: boolean = false;
 	@Prop(Function) readonly onSave!: () => void;
 
+	private queued = false;
 	private favorite = false;
 	private watched = false;
 	private rating = 0;
@@ -147,6 +155,10 @@ export default class MediaDetail extends Vue {
 		this.$emit('input', value);
 	}
 
+	private toggleQueued(): void {
+		this.queued = !this.queued;
+	}
+
 	private toggleFavorite(): void {
 		this.favorite = !this.favorite;
 	}
@@ -160,6 +172,7 @@ export default class MediaDetail extends Vue {
 	}
 
 	private reset() {
+		this.queued = AppModule.selectedItem.queued;
 		this.favorite = AppModule.selectedItem.favorite;
 		this.watched = AppModule.selectedItem.watched;
 		this.rating = AppModule.selectedItem.rating;
@@ -171,6 +184,7 @@ export default class MediaDetail extends Vue {
 
 	private async save() {
 		const item = Object.assign(AppModule.selectedItem);
+		item.queued = this.queued;
 		item.favorite = this.favorite;
 		item.watched = this.watched;
 		item.rating = this.rating;

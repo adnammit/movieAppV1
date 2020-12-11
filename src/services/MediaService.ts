@@ -36,6 +36,7 @@ class MediaService implements IMediaService {
 			rating: movie.rating,
 			watched: movie.watched,
 			favorite: movie.favorite,
+			queued: movie.queued,
 		};
 		return requestMgr
 			.post('user/' + userid + '/movies', request)
@@ -54,6 +55,7 @@ class MediaService implements IMediaService {
 			rating: movie.rating,
 			watched: movie.watched,
 			favorite: movie.favorite,
+			queued: movie.queued,
 		};
 		return requestMgr
 			.put('user/' + userid + '/movies', request)
@@ -97,6 +99,7 @@ class MediaService implements IMediaService {
 			rating: tv.rating,
 			watched: tv.watched,
 			favorite: tv.favorite,
+			queued: tv.queued,
 		};
 		return requestMgr
 			.post('user/' + userid + '/tv', request)
@@ -115,6 +118,7 @@ class MediaService implements IMediaService {
 			rating: tv.rating,
 			watched: tv.watched,
 			favorite: tv.favorite,
+			queued: tv.queued,
 		};
 		return requestMgr
 			.put('user/' + userid + '/tv', request)

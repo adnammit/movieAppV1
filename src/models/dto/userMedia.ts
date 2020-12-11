@@ -6,4 +6,5 @@ export default interface UserMedia {
 	rating: number;
 	watched: boolean;
 	favorite: boolean;
+	queued: boolean;
 }

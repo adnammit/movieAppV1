@@ -18,6 +18,7 @@ export default abstract class Media {
 	public rating = 0;
 	public watched = false;
 	public favorite = false;
+	public queued = false;
 	public abstract released: Date;
 
 	constructor(dto?: MovieDto | TvDto) {
@@ -37,5 +38,6 @@ export default abstract class Media {
 		this.rating = dto.rating;
 		this.watched = dto.watched;
 		this.favorite = dto.favorite;
+		this.queued = dto.queued;
 	}
 }
