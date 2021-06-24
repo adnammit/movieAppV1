@@ -103,6 +103,7 @@ A list of all movies in the collection. Filterable by:
 * OR add a Type prop to Media object -- i kinda like this better
     - go through and rejigger everything that evaluates type (instanceof / typeof)
 * search:
+    - search field clears after search but displays history (local mem cache)
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
         * add fields to rate, set fave/watched and button to add
@@ -121,7 +122,7 @@ A list of all movies in the collection. Filterable by:
 * add some kind of hot queue feature (stuff you want to watch soon)
     - change the favorite property to queue?
     - cos that might be redundant with 5 starts...
-* add csv export option
+* add csv import/export option
 * custom column sets
 * add tags/categories/lists
 * implement Surprise!

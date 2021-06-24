@@ -2,7 +2,7 @@
 	<div class="hero">
 		<div>
 			<h1 class="display-3">WTF Should We Watch</h1>
-			<p class="lead">Delivering sanity in a world of too many fucking choices</p>
+			<p class="lead">Delivering sanity in a world of too many f&#38;#%ing choices</p>
 		</div>
 	</div>
 </template>

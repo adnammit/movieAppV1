@@ -38,7 +38,7 @@ class App extends VuexModule implements AppState {
 	public get userItems() {
 		const items = this.collection ? this.collection?.items : [];
 		return items
-			.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : true))
+			.filter(m => (FilterModule.filterByFavorite ? m.favorite : FilterModule.filterByTodo ? !m.watched : FilterModule.filterByUpNext ? m.queued : true))
 			.filter(i => (FilterModule.filterToMovies ? i instanceof Movie : FilterModule.filterToTv ? i instanceof Tv : true));
 	}
 

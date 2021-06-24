@@ -7,6 +7,7 @@
 				<v-btn @click="resetFilter()" rounded :text="!isUnfiltered">All</v-btn>
 				<v-btn @click="toggleFavorites()" rounded :text="!isFilteredByFavorite">Favorites</v-btn>
 				<v-btn @click="toggleTodo()" rounded :text="!isFilteredByTodo">To Do</v-btn>
+				<v-btn @click="toggleUpNext()" rounded :text="!isFilteredByUpNext">Up Next</v-btn>
 				<v-btn @click="toggleMovies()" rounded :text="!isFilteredByMovies">Movies</v-btn>
 				<v-btn @click="toggleTv()" rounded :text="!isFilteredByTv">Tv</v-btn>
 				<v-btn @click="surprise()" rounded text><v-icon>mdi-pizza</v-icon></v-btn>
@@ -57,6 +58,10 @@ export default class FilterBar extends Vue {
 		return FilterModule.filterByTodo;
 	}
 
+	private get isFilteredByUpNext(): boolean {
+		return FilterModule.filterByUpNext;
+	}
+
 	private get isFilteredByMovies(): boolean {
 		return FilterModule.filterToMovies;
 	}
@@ -66,7 +71,7 @@ export default class FilterBar extends Vue {
 	}
 
 	private get isUnfiltered(): boolean {
-		return !FilterModule.filterByTodo && !FilterModule.filterByFavorite;
+		return !FilterModule.filterByTodo && !FilterModule.filterByFavorite && !FilterModule.filterByUpNext && !FilterModule.filterToTv && !FilterModule.filterToMovies;
 	}
 
 	private doSearch(): void {
@@ -79,6 +84,10 @@ export default class FilterBar extends Vue {
 
 	private toggleTodo(): void {
 		FilterModule.toggleTodo();
+	}
+
+	private toggleUpNext(): void {
+		FilterModule.toggleUpNext();
 	}
 
 	private toggleMovies(): void {

@@ -7,6 +7,7 @@ import SearchResult from '@/models/searchResult';
 export interface FilterState {
 	filterByFavorite: boolean;
 	filterByTodo: boolean;
+	filterByUpNext: boolean;
 	filterToMovies: boolean;
 	filterToTv: boolean;
 	showSearch: boolean;
@@ -16,6 +17,7 @@ export interface FilterState {
 enum FilterMutation {
 	SET_FILTER_FAVORITES = 'SET_FILTER_FAVORITES',
 	SET_FILTER_TODO = 'SET_FILTER_TODO',
+	SET_FILTER_UPNEXT = 'SET_FILTER_UPNEXT',
 	SET_SHOW_MOVIES = 'SET_SHOW_MOVIES',
 	SET_SHOW_TV = 'SET_SHOW_TV',
 	SET_SHOW_SEARCH = 'SET_SHOW_SEARCH',
@@ -26,6 +28,7 @@ enum FilterMutation {
 class Filter extends VuexModule implements FilterState {
 	public filterByFavorite = false;
 	public filterByTodo = false;
+	public filterByUpNext = false;
 	public filterToMovies = false;
 	public filterToTv = false;
 	public showSearch = false;
@@ -36,6 +39,7 @@ class Filter extends VuexModule implements FilterState {
 		const val = !this.filterByFavorite;
 		this.context.commit(FilterMutation.SET_FILTER_FAVORITES, val);
 		if (val && this.filterByTodo) this.context.commit(FilterMutation.SET_FILTER_TODO, false);
+		if (val && this.filterByUpNext) this.context.commit(FilterMutation.SET_FILTER_UPNEXT, false);
 	}
 
 	@Action
@@ -43,6 +47,15 @@ class Filter extends VuexModule implements FilterState {
 		const val = !this.filterByTodo;
 		this.context.commit(FilterMutation.SET_FILTER_TODO, val);
 		if (val && this.filterByFavorite) this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
+		if (val && this.filterByUpNext) this.context.commit(FilterMutation.SET_FILTER_UPNEXT, false);
+	}
+
+	@Action
+	async toggleUpNext() {
+		const val = !this.filterByUpNext;
+		this.context.commit(FilterMutation.SET_FILTER_UPNEXT, val);
+		if (val && this.filterByFavorite) this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
+		if (val && this.filterByTodo) this.context.commit(FilterMutation.SET_FILTER_TODO, false);
 	}
 
 	@Action
@@ -63,6 +76,9 @@ class Filter extends VuexModule implements FilterState {
 	async resetFilter() {
 		this.context.commit(FilterMutation.SET_FILTER_FAVORITES, false);
 		this.context.commit(FilterMutation.SET_FILTER_TODO, false);
+		this.context.commit(FilterMutation.SET_FILTER_UPNEXT, false);
+		this.context.commit(FilterMutation.SET_SHOW_TV, false);
+		this.context.commit(FilterMutation.SET_SHOW_MOVIES, false);
 	}
 
 	@Action
@@ -106,6 +122,11 @@ class Filter extends VuexModule implements FilterState {
 	@Mutation
 	SET_FILTER_TODO(val: boolean) {
 		this.filterByTodo = val;
+	}
+
+	@Mutation
+	SET_FILTER_UPNEXT(val: boolean) {
+		this.filterByUpNext = val;
 	}
 
 	@Mutation
