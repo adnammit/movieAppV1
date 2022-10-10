@@ -57,7 +57,7 @@ then install types
 npm i @types/okta__okta-vue
 ```
 
-## Other Ref
+## Other Reference
 * [Name That Color](http://chir.ag/projects/name-that-color/#42853E)
 * [material icons](https://cdn.materialdesignicons.com/1.1.34/)
 * [font awesome](https://fontawesome.com/icons)
@@ -99,6 +99,7 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
+* media type sort doesn't work -- implement custom sort or disable
 * maybe template MediaTable rows better (template rows not columns so you can add the type w/out being weird)
 * OR add a Type prop to Media object -- i kinda like this better
     - go through and rejigger everything that evaluates type (instanceof / typeof)
@@ -117,6 +118,7 @@ A list of all movies in the collection. Filterable by:
 * how to map okta user to our user model?
     - email might be the best "pk"...
 * CSS overhaul: consolidate css for movies and search
+* mobile optimization
 
 ### Feature List:
 * add some kind of hot queue feature (stuff you want to watch soon)
@@ -128,8 +130,10 @@ A list of all movies in the collection. Filterable by:
 * implement Surprise!
     - spinning pizza!
 * add filter by genre
+* add filter by rating
 * add comments
 * add [uNoGS](https://rapidapi.com/unogs/api/unogs) to query whether or not a movie is available on netflix
     - or try [Watch Here](https://rapidapi.com/devroldy/api/watch-here/details) -- get all the streaming things at once! -- would have to pay for this one
 * add [bechdel test api integration](https://bechdeltest.com/api/v1/doc)
 * wow yr build takes one million years... see if you can delete some unused packages or something
+

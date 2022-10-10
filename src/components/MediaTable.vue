@@ -91,7 +91,7 @@ export default class MediaTable extends Vue {
 	private showDetail = false;
 
 	private headers = [
-		{ text: 'Type', sortable: true, value: 'controls' },
+		{ text: 'Type', sortable: false, value: 'controls' },
 		{ text: 'Title', sortable: true, value: 'title' },
 		{ text: 'Year', sortable: true, value: 'released' },
 		{ text: 'Genre', sortable: false, value: 'genres', align: 'center' },
