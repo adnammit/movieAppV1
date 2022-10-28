@@ -9,6 +9,7 @@ const requestMgr = axios.create({
 	baseURL: `${process.env.VUE_APP_MEDIA_SERVICE_URL}api/v1/`,
 });
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class MediaService implements IMediaService {
 	// we don't actually need this right now cos we just use the okta user
 	public async getUsers(): Promise<User[]> {
@@ -162,5 +163,6 @@ class MediaService implements IMediaService {
 		console.log(error.config);
 	}
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export default new MediaService();

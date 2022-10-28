@@ -1,6 +1,6 @@
 # movie-picker
 
- Stores a to-do list of movies that you want to and have already watched.
+ Stores a to-do list of film and television that you want to and have already watched.
 
  This vital, relationship-saving software also includes a random movie selector to cut down on the amount of time discussing what movie you should watch tonight.
 
@@ -99,11 +99,16 @@ A list of all movies in the collection. Filterable by:
         - clicking modal "Save" adds all selected items to the collection
 
 ### TO DO
+* mobile optimization
+* add tooltips
+* build out random button - change icon to dice
 * media type sort doesn't work -- implement custom sort or disable
 * maybe template MediaTable rows better (template rows not columns so you can add the type w/out being weird)
 * OR add a Type prop to Media object -- i kinda like this better
     - go through and rejigger everything that evaluates type (instanceof / typeof)
 * search:
+    - change current search to Add button
+    - search should search our existing collection
     - search field clears after search but displays history (local mem cache)
     - add actions: details, add to collection
         * clicking a title opens details with an "Add to Collection" option
@@ -118,7 +123,6 @@ A list of all movies in the collection. Filterable by:
 * how to map okta user to our user model?
     - email might be the best "pk"...
 * CSS overhaul: consolidate css for movies and search
-* mobile optimization
 
 ### Feature List:
 * add some kind of hot queue feature (stuff you want to watch soon)
